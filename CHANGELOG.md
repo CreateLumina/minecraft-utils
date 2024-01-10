@@ -1,5 +1,14 @@
 # Changelog
 
+## 7.5.1
+### @xmcl/file-transfer@1.0.6
+#### Bug Fixes
+
+- fix: Should correctly handle range download n+1 issue ([333b7183fbfe65c19a050ed1739f7f8de1f3a1c7](https://github.com/voxelum/minecraft-launcher-core-node/commit/333b7183fbfe65c19a050ed1739f7f8de1f3a1c7))
+### @xmcl/installer@5.3.1
+- Dependency @xmcl/file-transfer bump **patch**
+
+
 ## 7.5.0
 ### @xmcl/nbt@3.0.2
 #### Bug Fixes
