@@ -152,8 +152,8 @@ importers:
   packages/curseforge:
     dependencies:
       undici:
-        specifier: 6.0.1
-        version: 6.0.1
+        specifier: 6.6.1
+        version: 6.6.1
     devDependencies:
       esbuild:
         specifier: ^0.17.16
@@ -168,8 +168,8 @@ importers:
         specifier: ^0.37.39
         version: 0.37.39
       undici:
-        specifier: 6.0.1
-        version: 6.0.1
+        specifier: 6.6.1
+        version: 6.6.1
     devDependencies:
       '@types/node':
         specifier: ~18
@@ -226,8 +226,8 @@ importers:
         specifier: ^4.1.1
         version: 4.1.1
       undici:
-        specifier: 6.0.1
-        version: 6.0.1
+        specifier: 6.6.1
+        version: 6.6.1
     devDependencies:
       '@types/node':
         specifier: ~18.15.11
@@ -334,11 +334,14 @@ importers:
         specifier: workspace:^*
         version: link:../unzip
       undici:
-        specifier: 6.0.1
-        version: 6.0.1
+        specifier: 6.6.1
+        version: 6.6.1
       yauzl:
         specifier: ^2.10.0
         version: 2.10.0
+      yazl:
+        specifier: ^2.5.1
+        version: 2.5.1
     devDependencies:
       '@types/node':
         specifier: ~18.15.11
@@ -346,6 +349,9 @@ importers:
       '@types/yauzl':
         specifier: ^2.10.0
         version: 2.10.0
+      '@types/yazl':
+        specifier: ^2.4.5
+        version: 2.4.5
       '@xmcl/eslint-config':
         specifier: workspace:^*
         version: link:../eslint-config
@@ -418,8 +424,8 @@ importers:
   packages/modrinth:
     dependencies:
       undici:
-        specifier: 6.0.1
-        version: 6.0.1
+        specifier: 6.6.1
+        version: 6.6.1
     devDependencies:
       esbuild:
         specifier: ^0.17.16
@@ -437,8 +443,8 @@ importers:
         specifier: ^4.3.2
         version: 4.3.2
       undici:
-        specifier: 6.0.1
-        version: 6.0.1
+        specifier: 6.6.1
+        version: 6.6.1
     devDependencies:
       '@types/node':
         specifier: ^18.15.11
@@ -586,8 +592,8 @@ importers:
   packages/user:
     dependencies:
       undici:
-        specifier: 6.0.1
-        version: 6.0.1
+        specifier: 6.6.1
+        version: 6.6.1
       uuid:
         specifier: ^9.0.0
         version: 9.0.0
@@ -1257,6 +1263,12 @@ packages:
     dependencies:
       '@types/node': 18.15.11
 
+  /@types/yazl@2.4.5:
+    resolution: {integrity: sha512-qpmPfx32HS7vlGJf7EsoM9qJnLZhXJBf1KH0hzfdc+D794rljQWh4H0I/UrZy+6Nhqn0l2jdBZXBGZtR1vnHqw==}
+    dependencies:
+      '@types/node': 18.15.11
+    dev: true
+
   /@typescript-eslint/eslint-plugin@6.13.2(@typescript-eslint/parser@6.13.2)(eslint@8.38.0)(typescript@5.2.2):
     resolution: {integrity: sha512-3+9OGAWHhk4O1LlcwLBONbdXsAhLjyCFogJY/cWy2lxdVJ2JrcTF2pTGMaLl2AE7U1l31n8Py4a8bx5DLf/0dQ==}
     engines: {node: ^16.0.0 || >=18.0.0}
@@ -1735,7 +1747,7 @@ packages:
     dev: false
 
   /buffer-crc32@0.2.13:
-    resolution: {integrity: sha1-DTM+PwDqxQqhRUq9MO+MKl2ackI=}
+    resolution: {integrity: sha512-VO9Ht/+p3SN7SKWqcrgEzjGbRSJYTx+Q1pTQC0wrWqHx0vpJraQ6GtHx8tvcg1rlK1byhU5gccxgOgj7B0TDkQ==}
     dev: false
 
   /buffer-from@1.1.2:
@@ -4270,8 +4282,8 @@ packages:
       which-boxed-primitive: 1.0.2
     dev: false
 
-  /undici@6.0.1:
-    resolution: {integrity: sha512-eZFYQLeS9BiXpsU0cuFhCwfeda2MnC48EVmmOz/eCjsTgmyTdaHdVsPSC/kwC2GtW2e0uH0HIPbadf3/bRWSxw==}
+  /undici@6.6.1:
+    resolution: {integrity: sha512-J0GaEp0ztu/grIE2Uq57AbK6TRb+bWbOlxu0POCzhFKA6LKbwSAev+hDQaQcgUUA9CPs8Ky+cauzTHnQrtAQEA==}
     engines: {node: '>=18.0'}
     dependencies:
       '@fastify/busboy': 2.1.0
@@ -4603,6 +4615,12 @@ packages:
     dependencies:
       buffer-crc32: 0.2.13
       fd-slicer: 1.1.0
+    dev: false
+
+  /yazl@2.5.1:
+    resolution: {integrity: sha512-phENi2PLiHnHb6QBVot+dJnaAZ0xosj7p3fWl+znIjBDlnMI2PsZCJZ306BPTFOaHf5qdDEI8x5qFrSOBN5vrw==}
+    dependencies:
+      buffer-crc32: 0.2.13
     dev: false
 
   /yocto-queue@0.1.0:
