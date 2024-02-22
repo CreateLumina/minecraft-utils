@@ -44,8 +44,8 @@ jobs:
         run: |
           node --eval "console.log(JSON.parse(require('fs').readFileSync('package.json').toString()).version)" > tag.log
           git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/CreateLumina/minecraft-utils.git"
-          git config user.name ci010
-          git config user.email cijhn@hotmail.com
+          git config user.name PadowYT2
+          git config user.email me@padow.ru
           git tag -f $(cat tag.log)
           git push origin tag $(cat tag.log) -f
         env:
