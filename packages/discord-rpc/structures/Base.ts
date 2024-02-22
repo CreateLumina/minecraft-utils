@@ -1,12 +1,12 @@
-import type { Client } from '../Client'
+import type { Client } from '../Client';
 
 export class Base {
-  /**
+    /**
      * the client instance
      */
-  client: Client
+    client: Client;
 
-  constructor(client: Client) {
-    this.client = client
-  }
+    constructor(client: Client) {
+        this.client = client;
+    }
 }

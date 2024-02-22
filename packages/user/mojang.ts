@@ -1,4 +1,4 @@
-import { Dispatcher, fetch, File, FormData } from 'undici'
+import { Dispatcher, fetch, File, FormData } from 'undici';
 
 /**
  * Users defined question when they register this account
@@ -47,158 +47,162 @@ import { Dispatcher, fetch, File, FormData } from 'undici'
  *
  */
 export interface MojangChallenge {
-  readonly answer: { id: number }
-  readonly question: { id: number; question: string }
+    readonly answer: { id: number };
+    readonly question: { id: number; question: string };
 }
 
 export interface MojangChallengeResponse {
-  id: number
-  answer: string
+    id: number;
+    answer: string;
 }
 export interface MinecraftProfileResponse {
-  id: string // the real uuid of the account, woo
-  name: string // the mc user name of the account
-  skins: [{
-    id: string
-    state: 'ACTIVE' | 'string'
-    url: string
-    variant: 'CLASSIC' | string
-    alias: 'STEVE' | string
-  }]
-  capes: [{
-    id: string
-    state: 'ACTIVE' | string
-    url: string
-  }]
+    id: string; // the real uuid of the account, woo
+    name: string; // the mc user name of the account
+    skins: [
+        {
+            id: string;
+            state: 'ACTIVE' | 'string';
+            url: string;
+            variant: 'CLASSIC' | string;
+            alias: 'STEVE' | string;
+        },
+    ];
+    capes: [
+        {
+            id: string;
+            state: 'ACTIVE' | string;
+            url: string;
+        },
+    ];
 }
 
 export interface MinecraftOwnershipResponse {
-  /**
-       * If the account doesn't own the game, the items array will be empty.
-       */
-  items: Array<{
-    name: 'product_minecraft' | 'game_minecraft'
     /**
-             * jwt signature
-             */
-    signature: string
-  }>
-  /**
-       * jwt signature
-       */
-  signature: string
-  keyId: string
+     * If the account doesn't own the game, the items array will be empty.
+     */
+    items: Array<{
+        name: 'product_minecraft' | 'game_minecraft';
+        /**
+         * jwt signature
+         */
+        signature: string;
+    }>;
+    /**
+     * jwt signature
+     */
+    signature: string;
+    keyId: string;
 }
 
 export interface MinecraftProfileErrorResponse {
-  path: '/minecraft/profile'
-  errorType: 'NOT_FOUND' | string
-  error: string | 'NOT_FOUND'
-  errorMessage: string
-  developerMessage: string
+    path: '/minecraft/profile';
+    errorType: 'NOT_FOUND' | string;
+    error: string | 'NOT_FOUND';
+    errorMessage: string;
+    developerMessage: string;
 }
 export interface MojangSkin {
-  id: string
-  state: 'ACTIVE' | 'INACTIVE'
-  url: string
-  variant: 'SLIM' | 'CLASSIC'
+    id: string;
+    state: 'ACTIVE' | 'INACTIVE';
+    url: string;
+    variant: 'SLIM' | 'CLASSIC';
 }
 export interface MojangCape {
-  id: string
-  state: 'ACTIVE' | 'INACTIVE'
-  url: string
-  /**
+    id: string;
+    state: 'ACTIVE' | 'INACTIVE';
+    url: string;
+    /**
      * Capes name
      */
-  alias: string
+    alias: string;
 }
 
 export interface MicrosoftMinecraftProfile {
-  id: string
-  name: string
-  skins: MojangSkin[]
-  capes: MojangCape[]
+    id: string;
+    name: string;
+    skins: MojangSkin[];
+    capes: MojangCape[];
 }
 
 export interface NameChangeInformation {
-  changedAt: string
-  createdAt: string
-  nameChangeAllowed: boolean
+    changedAt: string;
+    createdAt: string;
+    nameChangeAllowed: boolean;
 }
 
 export enum NameAvailability {
-  DUPLICATE = 'DUPLICATE',
-  AVAILABLE = 'AVAILABLE',
-  NOT_ALLOWED = 'NOT_ALLOWED',
+    DUPLICATE = 'DUPLICATE',
+    AVAILABLE = 'AVAILABLE',
+    NOT_ALLOWED = 'NOT_ALLOWED',
 }
 
 export class SetNameError extends Error {
-  public path: string
-  public errorType: string
-  public error: string
-  public details: object
-  public errorMessage: string
-  public developerMessage: string
+    public path: string;
+    public errorType: string;
+    public error: string;
+    public details: object;
+    public errorMessage: string;
+    public developerMessage: string;
 
-  constructor(message: string, err: any) {
-    super(message)
-    this.name = 'SetNameError'
-    this.path = err.path
-    this.errorType = err.errorType
-    this.error = err.error
-    this.details = err.details
-    this.errorMessage = err.errorMessage
-    this.developerMessage = err.developerMessage
-  }
+    constructor(message: string, err: any) {
+        super(message);
+        this.name = 'SetNameError';
+        this.path = err.path;
+        this.errorType = err.errorType;
+        this.error = err.error;
+        this.details = err.details;
+        this.errorMessage = err.errorMessage;
+        this.developerMessage = err.developerMessage;
+    }
 }
 
 export class SetSkinError extends Error {
-  public path: string
-  public errorType: string
-  public error: string
-  public details: object
-  public errorMessage: string
-  public developerMessage: string
+    public path: string;
+    public errorType: string;
+    public error: string;
+    public details: object;
+    public errorMessage: string;
+    public developerMessage: string;
 
-  constructor(message: string, err: any) {
-    super(message)
-    this.name = 'SetSkinError'
-    this.path = err.path
-    this.errorType = err.errorType
-    this.error = err.error
-    this.details = err.details
-    this.errorMessage = err.errorMessage
-    this.developerMessage = err.developerMessage
-  }
+    constructor(message: string, err: any) {
+        super(message);
+        this.name = 'SetSkinError';
+        this.path = err.path;
+        this.errorType = err.errorType;
+        this.error = err.error;
+        this.details = err.details;
+        this.errorMessage = err.errorMessage;
+        this.developerMessage = err.developerMessage;
+    }
 }
 
 export class MojangError extends Error {
-  public path: string
-  public errorMessage: string
-  public developerMessage: string
+    public path: string;
+    public errorMessage: string;
+    public developerMessage: string;
 
-  constructor(err: any) {
-    super(err.errorMessage)
-    this.path = err.path
-    this.errorMessage = err.errorMessage
-    this.developerMessage = err.developerMessage
-    Object.assign(this, err)
-  }
+    constructor(err: any) {
+        super(err.errorMessage);
+        this.path = err.path;
+        this.errorMessage = err.errorMessage;
+        this.developerMessage = err.developerMessage;
+        Object.assign(this, err);
+    }
 }
 
 export class UnauthorizedError extends MojangError {
-  name = 'UnauthorizedError'
-  constructor(err: any) {
-    super(err)
-  }
+    name = 'UnauthorizedError';
+    constructor(err: any) {
+        super(err);
+    }
 }
 
 export class ProfileNotFoundError extends MojangError {
-  name = 'ProfileNotFoundError'
+    name = 'ProfileNotFoundError';
 
-  constructor(err: any) {
-    super(err)
-  }
+    constructor(err: any) {
+        super(err);
+    }
 }
 
 /**
@@ -208,235 +212,256 @@ export class ProfileNotFoundError extends MojangError {
  * @see {@link MicrosoftAuthenticator}
  */
 export class MojangClient {
-  constructor(private dispatcher?: Dispatcher) { }
+    constructor(private dispatcher?: Dispatcher) {}
 
-  async setName(name: string, token: string, signal?: AbortSignal) {
-    const resp = await fetch(`https://api.minecraftservices.com/minecraft/profile/name/${name}`, {
-      method: 'PUT',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      dispatcher: this.dispatcher,
-      signal,
-    })
-    switch (resp.status) {
-      case 200: return await resp.json() as MicrosoftMinecraftProfile
-      case 400: throw new SetNameError('Name is unavailable (Either taken or has not become available)', await resp.json())
-      case 403: throw new SetNameError('Name is unavailable (Either taken or has not become available)', await resp.json())
-      case 401: throw new SetNameError('Unauthorized (Bearer token expired or is not correct)', await resp.json())
-      case 429: throw new SetNameError('Too many requests sent', await resp.json())
-      case 500: throw new SetNameError('Timed out (API lagged out and could not respond)', await resp.json())
-    }
-    throw new SetNameError('Unknown error', await resp.json())
-  }
-
-  async getNameChangeInformation(token: string) {
-    const resp = await fetch('https://api.minecraftservices.com/minecraft/profile/namechange', {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      dispatcher: this.dispatcher,
-    })
-    return await resp.json() as NameChangeInformation
-  }
-
-  async checkNameAvailability(name: string, token: string, signal?: AbortSignal): Promise<NameAvailability> {
-    const resp = await fetch(`https://api.minecraftservices.com/minecraft/profile/name/${name}/available`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      dispatcher: this.dispatcher,
-      signal,
-    })
-    const result = await resp.json() as any
-    return result.status
-  }
-
-  async getProfile(token: string, signal?: AbortSignal): Promise<MicrosoftMinecraftProfile> {
-    const resp = await fetch('https://api.minecraftservices.com/minecraft/profile', {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      dispatcher: this.dispatcher,
-      signal,
-    })
-    if (resp.headers.get('content-type')?.toLocaleLowerCase() !== 'application/json') {
-      throw new Error(await resp.text())
-    }
-    const json = await resp.json() as any
-    if (resp.ok) {
-      return json as MicrosoftMinecraftProfile
-    } else if (json.error === 'NOT_FOUND') {
-      throw new ProfileNotFoundError(json)
-    } else if (resp.status === 401) {
-      throw new UnauthorizedError(json)
-    }
-    throw Object.assign(new Error('Unknown Error'), json)
-  }
-
-  async setSkin(fileName: string, skin: string | Buffer, variant: 'slim' | 'classic', token: string, signal?: AbortSignal) {
-    const body = typeof skin === 'string' ? JSON.stringify({ url: skin, variant }) : getSkinFormData(skin, fileName, variant)
-    const headers: Record<string, string> = {
-      Authorization: `Bearer ${token}`,
+    async setName(name: string, token: string, signal?: AbortSignal) {
+        const resp = await fetch(`https://api.minecraftservices.com/minecraft/profile/name/${name}`, {
+            method: 'PUT',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            dispatcher: this.dispatcher,
+            signal,
+        });
+        switch (resp.status) {
+            case 200:
+                return (await resp.json()) as MicrosoftMinecraftProfile;
+            case 400:
+                throw new SetNameError(
+                    'Name is unavailable (Either taken or has not become available)',
+                    await resp.json(),
+                );
+            case 403:
+                throw new SetNameError(
+                    'Name is unavailable (Either taken or has not become available)',
+                    await resp.json(),
+                );
+            case 401:
+                throw new SetNameError('Unauthorized (Bearer token expired or is not correct)', await resp.json());
+            case 429:
+                throw new SetNameError('Too many requests sent', await resp.json());
+            case 500:
+                throw new SetNameError('Timed out (API lagged out and could not respond)', await resp.json());
+        }
+        throw new SetNameError('Unknown error', await resp.json());
     }
 
-    if (typeof body === 'string') {
-      headers['Content-Type'] = 'application/json'
+    async getNameChangeInformation(token: string) {
+        const resp = await fetch('https://api.minecraftservices.com/minecraft/profile/namechange', {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            dispatcher: this.dispatcher,
+        });
+        return (await resp.json()) as NameChangeInformation;
     }
 
-    const resp = await fetch('https://api.minecraftservices.com/minecraft/profile/skins', {
-      method: 'POST',
-      headers,
-      body,
-      signal,
-    })
-
-    const profileResponse: MinecraftProfileResponse | MinecraftProfileErrorResponse = await resp.json() as any
-
-    if (resp.status === 401) {
-      throw new UnauthorizedError(await resp.json())
+    async checkNameAvailability(name: string, token: string, signal?: AbortSignal): Promise<NameAvailability> {
+        const resp = await fetch(`https://api.minecraftservices.com/minecraft/profile/name/${name}/available`, {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            dispatcher: this.dispatcher,
+            signal,
+        });
+        const result = (await resp.json()) as any;
+        return result.status;
     }
 
-    if ('error' in profileResponse || 'errorMessage' in profileResponse) {
-      throw new SetSkinError(`Fail to set skin ${profileResponse.errorMessage}`, profileResponse)
+    async getProfile(token: string, signal?: AbortSignal): Promise<MicrosoftMinecraftProfile> {
+        const resp = await fetch('https://api.minecraftservices.com/minecraft/profile', {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            dispatcher: this.dispatcher,
+            signal,
+        });
+        if (resp.headers.get('content-type')?.toLocaleLowerCase() !== 'application/json') {
+            throw new Error(await resp.text());
+        }
+        const json = (await resp.json()) as any;
+        if (resp.ok) {
+            return json as MicrosoftMinecraftProfile;
+        } else if (json.error === 'NOT_FOUND') {
+            throw new ProfileNotFoundError(json);
+        } else if (resp.status === 401) {
+            throw new UnauthorizedError(json);
+        }
+        throw Object.assign(new Error('Unknown Error'), json);
     }
 
-    return profileResponse
-  }
+    async setSkin(
+        fileName: string,
+        skin: string | Buffer,
+        variant: 'slim' | 'classic',
+        token: string,
+        signal?: AbortSignal,
+    ) {
+        const body =
+            typeof skin === 'string'
+                ? JSON.stringify({ url: skin, variant })
+                : getSkinFormData(skin, fileName, variant);
+        const headers: Record<string, string> = {
+            Authorization: `Bearer ${token}`,
+        };
 
-  async resetSkin(token: string, signal?: AbortSignal) {
-    const resp = await fetch('https://api.minecraftservices.com/minecraft/profile/skins/active', {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      dispatcher: this.dispatcher,
-      signal,
-    })
-    if (resp.status === 401) {
-      throw new UnauthorizedError(await resp.json())
+        if (typeof body === 'string') {
+            headers['Content-Type'] = 'application/json';
+        }
+
+        const resp = await fetch('https://api.minecraftservices.com/minecraft/profile/skins', {
+            method: 'POST',
+            headers,
+            body,
+            signal,
+        });
+
+        const profileResponse: MinecraftProfileResponse | MinecraftProfileErrorResponse = (await resp.json()) as any;
+
+        if (resp.status === 401) {
+            throw new UnauthorizedError(await resp.json());
+        }
+
+        if ('error' in profileResponse || 'errorMessage' in profileResponse) {
+            throw new SetSkinError(`Fail to set skin ${profileResponse.errorMessage}`, profileResponse);
+        }
+
+        return profileResponse;
     }
-  }
 
-  async hideCape(token: string, signal?: AbortSignal) {
-    const resp = await fetch('https://api.minecraftservices.com/minecraft/profile/capes/active', {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      dispatcher: this.dispatcher,
-      signal,
-    })
-    if (resp.status === 401) {
-      throw new UnauthorizedError(await resp.json())
+    async resetSkin(token: string, signal?: AbortSignal) {
+        const resp = await fetch('https://api.minecraftservices.com/minecraft/profile/skins/active', {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            dispatcher: this.dispatcher,
+            signal,
+        });
+        if (resp.status === 401) {
+            throw new UnauthorizedError(await resp.json());
+        }
     }
-  }
 
-  async showCape(capeId: string, token: string, signal?: AbortSignal) {
-    const resp = await fetch('https://api.minecraftservices.com/minecraft/profile/capes/active', {
-      method: 'PUT',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ capeId }),
-      dispatcher: this.dispatcher,
-      signal,
-    })
-    if (resp.status === 401) {
-      throw new UnauthorizedError(await resp.json())
+    async hideCape(token: string, signal?: AbortSignal) {
+        const resp = await fetch('https://api.minecraftservices.com/minecraft/profile/capes/active', {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            dispatcher: this.dispatcher,
+            signal,
+        });
+        if (resp.status === 401) {
+            throw new UnauthorizedError(await resp.json());
+        }
     }
-    if (resp.status === 400) {
-      throw new Error()
+
+    async showCape(capeId: string, token: string, signal?: AbortSignal) {
+        const resp = await fetch('https://api.minecraftservices.com/minecraft/profile/capes/active', {
+            method: 'PUT',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ capeId }),
+            dispatcher: this.dispatcher,
+            signal,
+        });
+        if (resp.status === 401) {
+            throw new UnauthorizedError(await resp.json());
+        }
+        if (resp.status === 400) {
+            throw new Error();
+        }
+        const profile = (await resp.json()) as MicrosoftMinecraftProfile;
+        return profile;
     }
-    const profile = await resp.json() as MicrosoftMinecraftProfile
-    return profile
-  }
 
-  async verifySecurityLocation(token: string, signal?: AbortSignal) {
-    const resp = await fetch('https://api.mojang.com/user/security/location', {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      dispatcher: this.dispatcher,
-      signal,
-    })
+    async verifySecurityLocation(token: string, signal?: AbortSignal) {
+        const resp = await fetch('https://api.mojang.com/user/security/location', {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            dispatcher: this.dispatcher,
+            signal,
+        });
 
-    if (resp.status === 204) {
-      return true
+        if (resp.status === 204) {
+            return true;
+        }
+        return false;
     }
-    return false
-  }
 
-  async getSecurityChallenges(token: string) {
-    const resp = await fetch('https://api.mojang.com/user/security/challenges', {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      dispatcher: this.dispatcher,
-    })
+    async getSecurityChallenges(token: string) {
+        const resp = await fetch('https://api.mojang.com/user/security/challenges', {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            dispatcher: this.dispatcher,
+        });
 
-    if (resp.status === 401) {
-      throw new UnauthorizedError(await resp.json())
+        if (resp.status === 401) {
+            throw new UnauthorizedError(await resp.json());
+        }
+        return (await resp.json()) as MojangChallenge[];
     }
-    return await resp.json() as MojangChallenge[]
-  }
 
-  async submitSecurityChallenges(answers: MojangChallengeResponse[], token: string) {
-    const resp = await fetch('https://api.mojang.com/user/security/location', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(answers),
-      dispatcher: this.dispatcher,
-    })
+    async submitSecurityChallenges(answers: MojangChallengeResponse[], token: string) {
+        const resp = await fetch('https://api.mojang.com/user/security/location', {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(answers),
+            dispatcher: this.dispatcher,
+        });
 
-    if (resp.status === 204) {
-      return
+        if (resp.status === 204) {
+            return;
+        }
+        if (resp.status === 401) {
+            throw new UnauthorizedError(await resp.json());
+        }
+        throw new Error();
     }
-    if (resp.status === 401) {
-      throw new UnauthorizedError(await resp.json())
-    }
-    throw new Error()
-  }
 
-  /**
+    /**
      * Return the owner ship list of the player with those token.
      */
-  async checkGameOwnership(token: string, signal?: AbortSignal) {
-    const mcResponse = await fetch('https://api.minecraftservices.com/entitlements/mcstore', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      dispatcher: this.dispatcher,
-      signal,
-    })
+    async checkGameOwnership(token: string, signal?: AbortSignal) {
+        const mcResponse = await fetch('https://api.minecraftservices.com/entitlements/mcstore', {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            dispatcher: this.dispatcher,
+            signal,
+        });
 
-    if (mcResponse.status === 401) {
-      throw new UnauthorizedError(await mcResponse.text())
+        if (mcResponse.status === 401) {
+            throw new UnauthorizedError(await mcResponse.text());
+        }
+
+        if (!mcResponse.ok || mcResponse.headers.get('content-type')?.toLocaleLowerCase() !== 'application/json') {
+            throw new Error(await mcResponse.text());
+        }
+
+        const result = (await mcResponse.json()) as MinecraftOwnershipResponse;
+
+        return result;
     }
-
-    if (!mcResponse.ok || mcResponse.headers.get('content-type')?.toLocaleLowerCase() !== 'application/json') {
-      throw new Error(await mcResponse.text())
-    }
-
-    const result = await mcResponse.json() as MinecraftOwnershipResponse
-
-    return result
-  }
 }
 
 function getSkinFormData(buf: Buffer, fileName: string, variant: 'slim' | 'classic') {
-  const form = new FormData()
-  form.append('variant', variant)
-  const file = new File([buf], fileName, { type: 'image/png' })
-  form.append('file', file)
-  return form
+    const form = new FormData();
+    form.append('variant', variant);
+    const file = new File([buf], fileName, { type: 'image/png' });
+    form.append('file', file);
+    return form;
 }

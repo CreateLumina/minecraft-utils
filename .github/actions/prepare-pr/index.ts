@@ -2,7 +2,7 @@ import fs from 'fs';
 import convBump from 'conventional-recommended-bump';
 import semver from 'semver';
 import * as core from '@actions/core';
-import { join } from 'path'
+import { join } from 'path';
 
 declare interface Package {
     name: string;
@@ -10,7 +10,7 @@ declare interface Package {
     /**
      * Level of change
      */
-    level?: Level
+    level?: Level;
     /**
      * Release type
      */
@@ -18,10 +18,10 @@ declare interface Package {
     passive?: boolean;
     newVersion?: string;
 
-    reasons?: (Commit | string)[]
-    feats?: Commit[]
-    fixes?: Commit[]
-    breakings?: Commit[]
+    reasons?: (Commit | string)[];
+    feats?: Commit[];
+    fixes?: Commit[];
+    breakings?: Commit[];
 }
 
 interface PackageJSON {
@@ -30,19 +30,19 @@ interface PackageJSON {
     dependencies?: { [name: string]: string };
 }
 
-type Level = 0 | 1 | 2
+type Level = 0 | 1 | 2;
 
-type Commit = import('conventional-commits-parser').Commit
-type Recomendation = import('conventional-recommended-bump').Callback.Recommendation
-type ReleaseType = import('conventional-recommended-bump').Callback.Recommendation.ReleaseType
+type Commit = import('conventional-commits-parser').Commit;
+type Recomendation = import('conventional-recommended-bump').Callback.Recommendation;
+type ReleaseType = import('conventional-recommended-bump').Callback.Recommendation.ReleaseType;
 
 interface BumpSuggestion extends Recomendation {
-    level: Level
-    reasons: Commit[]
-    feats: Commit[]
-    fixes: Commit[]
-    breakings: Commit[]
-    releaseType: ReleaseType
+    level: Level;
+    reasons: Commit[];
+    feats: Commit[];
+    fixes: Commit[];
+    breakings: Commit[];
+    releaseType: ReleaseType;
 }
 
 const DRY = !process.env.CI;
@@ -50,7 +50,7 @@ const DRY = !process.env.CI;
 /**
  * Toposort the packages
  */
-function toposort(dependencies: { [name: string]: Package[]; }, packages: Array<Package>): Array<Package> {
+function toposort(dependencies: { [name: string]: Package[] }, packages: Array<Package>): Array<Package> {
     const sorted: Package[] = [];
     const visited = new Set();
     function dfs(pkg: Package) {
@@ -76,11 +76,12 @@ function scanPackages() {
     function readPackageJson(packageName: string) {
         let packageJSON;
         try {
-            packageJSON = JSON.parse(fs.readFileSync(join(process.cwd(), `packages/${packageName}/package.json`)).toString());
-            packageJSON.dependencies
+            packageJSON = JSON.parse(
+                fs.readFileSync(join(process.cwd(), `packages/${packageName}/package.json`)).toString(),
+            );
+            packageJSON.dependencies;
         } catch (e) {
-            if ((e as any).code === 'ENOTDIR' || (e as any).code === 'ENOENT')
-                return undefined;
+            if ((e as any).code === 'ENOTDIR' || (e as any).code === 'ENOENT') return undefined;
             throw e;
         }
         return packageJSON;
@@ -89,18 +90,19 @@ function scanPackages() {
     const reversedDependencies: Record<string, Package[]> = {};
     const dependencies: Record<string, Package[]> = {};
     // scan all packages and filter out useless folder like .DS_Store
-    const packages: Package[] = fs.readdirSync('packages')
-        .map(name => ({ content: readPackageJson(name), name }))
-        .filter(pack => pack.content !== undefined);
+    const packages: Package[] = fs
+        .readdirSync('packages')
+        .map((name) => ({ content: readPackageJson(name), name }))
+        .filter((pack) => pack.content !== undefined);
     // create dependencies mapping
-    packages.forEach(pack => {
+    packages.forEach((pack) => {
         nameToPack[pack.name] = pack;
     });
-    packages.forEach(pack => {
+    packages.forEach((pack) => {
         const packageJSON = pack.content;
         if (packageJSON.dependencies) {
             for (const dep of Object.keys(packageJSON.dependencies)) {
-                if (dep.startsWith('@xmcl')) {
+                if (dep.startsWith('@createlumina')) {
                     const dependOn = dep.substring(dep.indexOf('/') + 1);
                     reversedDependencies[dependOn] = reversedDependencies[dependOn] || [];
                     reversedDependencies[dependOn].push(pack);
@@ -118,31 +120,36 @@ function scanPackages() {
 
 /**
  * Fill the package bump info by commits under it
- * @param {Package[]} packages 
+ * @param {Package[]} packages
  */
 async function fillPackageBumpInfo(packages: Package[]) {
     async function getBumpSuggestion(pkg: string) {
         const result: BumpSuggestion = await new Promise<BumpSuggestion>((resolve, reject) => {
-            convBump({
-                path: join(process.cwd(), `packages/${pkg}`),
-                whatBump(comments) {
-                    const reasons = comments.filter(c => c.type === 'feat' || c.type === 'fix' || c.header?.startsWith('BREAKING CHANGE'));
-                    const feats = comments.filter(c => c.type === 'feat');
-                    const fixes = comments.filter(c => c.type === 'fix');
-                    const breakings = comments.filter(c => c.header?.startsWith('BREAKING CHANGE'));
-                    if (comments.some(c => c.header?.startsWith('BREAKING CHANGE'))) {
-                        return { level: 0, reasons, feats, fixes, breakings }; // major
-                    } else if (comments.some(c => c.type === 'feat')) {
-                        return { level: 1, reasons, feats, fixes, breakings }; // minor
-                    } else if (comments.some(c => c.type === 'fix')) {
-                        return { level: 2, reasons, feats, fixes, breakings }; // patch
-                    }
-                    return {}
-                }
-            }, function (err, result) {
-                if (err) reject(err);
-                else resolve(result as BumpSuggestion);
-            });
+            convBump(
+                {
+                    path: join(process.cwd(), `packages/${pkg}`),
+                    whatBump(comments) {
+                        const reasons = comments.filter(
+                            (c) => c.type === 'feat' || c.type === 'fix' || c.header?.startsWith('BREAKING CHANGE'),
+                        );
+                        const feats = comments.filter((c) => c.type === 'feat');
+                        const fixes = comments.filter((c) => c.type === 'fix');
+                        const breakings = comments.filter((c) => c.header?.startsWith('BREAKING CHANGE'));
+                        if (comments.some((c) => c.header?.startsWith('BREAKING CHANGE'))) {
+                            return { level: 0, reasons, feats, fixes, breakings }; // major
+                        } else if (comments.some((c) => c.type === 'feat')) {
+                            return { level: 1, reasons, feats, fixes, breakings }; // minor
+                        } else if (comments.some((c) => c.type === 'fix')) {
+                            return { level: 2, reasons, feats, fixes, breakings }; // patch
+                        }
+                        return {};
+                    },
+                },
+                function (err, result) {
+                    if (err) reject(err);
+                    else resolve(result as BumpSuggestion);
+                },
+            );
         });
         return result;
     }
@@ -159,7 +166,7 @@ async function fillPackageBumpInfo(packages: Package[]) {
             pkg.feats = result.feats;
             pkg.fixes = result.fixes;
             pkg.breakings = result.breakings;
-            console.log(`${pkg.name}: ${pkg.newVersion} ${pkg.releaseType}`)
+            console.log(`${pkg.name}: ${pkg.newVersion} ${pkg.releaseType}`);
         }
     }
 }
@@ -167,10 +174,10 @@ async function fillPackageBumpInfo(packages: Package[]) {
 /**
  * Bump dependencies according to the package changes
  */
-function bumpDependenciesPackage(reversedDependencies: { [name: string]: Package[]; }, packages: Array<Package>) {
+function bumpDependenciesPackage(reversedDependencies: { [name: string]: Package[] }, packages: Array<Package>) {
     let bumpTotalOrder = 3;
     /**
-     * @param {Package} pkg 
+     * @param {Package} pkg
      */
     function bump(pkg: Package) {
         // only major & minor change affect the dependents packages update
@@ -184,7 +191,7 @@ function bumpDependenciesPackage(reversedDependencies: { [name: string]: Package
             const bumpType = 'patch';
 
             // if current bumping priority is lower than affected bumped priority
-            if (!("level" in dep) || (typeof dep.level === 'number' && dep.level > bumpLevel)) {
+            if (!('level' in dep) || (typeof dep.level === 'number' && dep.level > bumpLevel)) {
                 affected = true;
                 dep.level = bumpLevel;
                 dep.releaseType = bumpType;
@@ -202,7 +209,7 @@ function bumpDependenciesPackage(reversedDependencies: { [name: string]: Package
             }
         }
     }
-    for (const pkg of packages.filter(pkg => pkg.newVersion && pkg.releaseType)) {
+    for (const pkg of packages.filter((pkg) => pkg.newVersion && pkg.releaseType)) {
         bumpTotalOrder = Math.min(bumpTotalOrder, pkg.level || 999);
         bump(pkg);
     }
@@ -212,8 +219,8 @@ function bumpDependenciesPackage(reversedDependencies: { [name: string]: Package
 
 /**
  * Update the package.json
- * 
- * @param {Package[]} packages 
+ *
+ * @param {Package[]} packages
  * @param {Record<string, Package[]>} dependencies
  */
 function writeAllNewVersionsToPackageJson(packages: Package[], dependencies: Record<string, Package[]>) {
@@ -232,12 +239,12 @@ function writeAllNewVersionsToPackageJson(packages: Package[], dependencies: Rec
 
 /**
  * Get commits info of packagess
- * @param {Package[]} packages 
+ * @param {Package[]} packages
  */
 function getCommitInfoText(packages: Package[]) {
     let body = ``;
 
-    for (const pkg of packages.sort((a, b) => a.passive && !b.passive ? 1 : !a.passive && b.passive ? -1 : 0)) {
+    for (const pkg of packages.sort((a, b) => (a.passive && !b.passive ? 1 : !a.passive && b.passive ? -1 : 0))) {
         const packageJSON = pkg.content;
         if (!pkg.newVersion) continue;
         body += `- **${packageJSON.name}: ${packageJSON.version}** -> ${pkg.newVersion}\n`;
@@ -246,7 +253,7 @@ function getCommitInfoText(packages: Package[]) {
                 if (typeof reason === 'string') {
                     body += `  - ${reason}\n`;
                 } else {
-                    body += `  - ${reason.header} ([${reason.hash}](https://github.com/voxelum/minecraft-launcher-core-node/commit/${reason.hash}))\n`
+                    body += `  - ${reason.header} ([${reason.hash}](https://github.com/CreateLumina/minecraft-utils/commit/${reason.hash}))\n`;
                 }
             }
         }
@@ -255,17 +262,17 @@ function getCommitInfoText(packages: Package[]) {
 }
 
 /**
- * @param {string} version 
- * @param {Package[]} packages 
+ * @param {string} version
+ * @param {Package[]} packages
  */
 function writeChangelog(version: string, packages: Package[]) {
     let body = `\n## ${version}\n`;
 
     function log(reason: Commit) {
-        return `- ${reason.header} ([${reason.hash}](https://github.com/voxelum/minecraft-launcher-core-node/commit/${reason.hash}))\n`
+        return `- ${reason.header} ([${reason.hash}](https://github.com/CreateLumina/minecraft-utils/commit/${reason.hash}))\n`;
     }
 
-    for (const pkg of packages.sort((a, b) => a.passive && !b.passive ? 1 : !a.passive && b.passive ? -1 : 0)) {
+    for (const pkg of packages.sort((a, b) => (a.passive && !b.passive ? 1 : !a.passive && b.passive ? -1 : 0))) {
         const packageJSON = pkg.content;
         if (!pkg.newVersion) continue;
         body += `### ${packageJSON.name}@${pkg.newVersion}\n`;
@@ -274,20 +281,20 @@ function writeChangelog(version: string, packages: Package[]) {
 
             if (breakings && breakings.length !== 0) {
                 body += '#### BREAKING CHANGES\n\n';
-                breakings.map(log).forEach(l => body += l);
+                breakings.map(log).forEach((l) => (body += l));
             }
             if (feats && feats.length !== 0) {
                 body += '#### Features\n\n';
-                feats.map(log).forEach(l => body += l);
+                feats.map(log).forEach((l) => (body += l));
             }
             if (fixes && fixes.length !== 0) {
                 body += '#### Bug Fixes\n\n';
-                fixes.map(log).forEach(l => body += l);
+                fixes.map(log).forEach((l) => (body += l));
             }
 
-            let texts = reasons.filter(r => typeof r === 'string');
+            let texts = reasons.filter((r) => typeof r === 'string');
 
-            texts.forEach(l => body += `- ${l}\n`);
+            texts.forEach((l) => (body += `- ${l}\n`));
         }
     }
 
@@ -307,11 +314,11 @@ function writeChangelog(version: string, packages: Package[]) {
 }
 
 function getPrTitle(version: string) {
-    return `Prepare Release ${version}`
+    return `Prepare Release ${version}`;
 }
 /**
  * Get PR body text
- * @param {Package[]} packages 
+ * @param {Package[]} packages
  */
 function getPRBody(packages: Package[]) {
     let body = `This PR is auto-generated by
@@ -322,10 +329,10 @@ to prepare new releases for changed packages.\n\n### Package Changes\n\n`;
 }
 /**
  * Get commit message
- * @param {string} version 
+ * @param {string} version
  */
 function getCommitMessage(version: string) {
-    return `chore(release): bump version ${version}`
+    return `chore(release): bump version ${version}`;
 }
 
 async function main(output: (k: string, v: any) => void) {
@@ -335,18 +342,17 @@ async function main(output: (k: string, v: any) => void) {
 
     await fillPackageBumpInfo(packages);
     const bumpLevel = bumpDependenciesPackage(reversedDependencies, packages);
-    
-    console.log(`Current bump level is: ${bumpLevel}`)
 
-    console.log(`Commit info:`)
+    console.log(`Current bump level is: ${bumpLevel}`);
+
+    console.log(`Commit info:`);
     console.log(getCommitInfoText(packages));
 
     const packageJSON = JSON.parse(fs.readFileSync(`package.json`).toString());
 
-
     if (bumpLevel < 3) {
         const oldVersion = packageJSON.version;
-        const bumpType = ["major", "minor", "patch"][bumpLevel] as ReleaseType;
+        const bumpType = ['major', 'minor', 'patch'][bumpLevel] as ReleaseType;
         const newVersion = semver.inc(packageJSON.version, bumpType);
         if (newVersion) {
             packageJSON.version = newVersion;
@@ -372,7 +378,11 @@ async function main(output: (k: string, v: any) => void) {
     }
 }
 
-main(core ? core.setOutput : (k, v) => {
-    console.log(k)
-    console.log(v)
-});
+main(
+    core
+        ? core.setOutput
+        : (k, v) => {
+              console.log(k);
+              console.log(v);
+          },
+);

@@ -4,11 +4,11 @@
  * You can use {@link queryStatus} with {@link QueryOptions} to ping a {@link Status} of a server
  *
  * @packageDocumentation
- * @module @xmcl/client
+ * @module @createlumina/client
  */
 
-export * from './coders'
-export * from './packet'
-export * from './channel'
-export * from './status'
-export * from './lan'
+export * from './coders';
+export * from './packet';
+export * from './channel';
+export * from './status';
+export * from './lan';

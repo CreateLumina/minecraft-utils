@@ -1,5 +1,5 @@
 /**
- * @module @xmcl/model
+ * @module @createlumina/model
  */
-export * from './block'
-export * from './player'
+export * from './block';
+export * from './player';

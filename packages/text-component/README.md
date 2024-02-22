@@ -1,10 +1,12 @@
 # Text-component Module
 
-[![npm version](https://img.shields.io/npm/v/@xmcl/text-component.svg)](https://www.npmjs.com/package/@xmcl/text-component)
-[![Downloads](https://img.shields.io/npm/dm/@xmcl/text-component.svg)](https://npmjs.com/@xmcl/text-component)
-[![Install size](https://packagephobia.now.sh/badge?p=@xmcl/text-component)](https://packagephobia.now.sh/result?p=@xmcl/text-component)
-[![npm](https://img.shields.io/npm/l/@xmcl/minecraft-launcher-core.svg)](https://github.com/voxelum/minecraft-launcher-core-node/blob/master/LICENSE)
-[![Build Status](https://github.com/voxelum/minecraft-launcher-core-node/workflows/Build/badge.svg)](https://github.com/Voxelum/minecraft-launcher-core-node/actions?query=workflow%3ABuild)
+Version made for [Lumina](https://github.com/CreateLumina) projects. Original credits goes to [Voxelum/minecraft-launcher-core-node](https://github.com/Voxelum/minecraft-launcher-core-node)
+
+[![npm version](https://img.shields.io/npm/v/@createlumina/text-component.svg)](https://www.npmjs.com/package/@createlumina/text-component)
+[![Downloads](https://img.shields.io/npm/dm/@createlumina/text-component.svg)](https://npmjs.com/@createlumina/text-component)
+[![Install size](https://packagephobia.now.sh/badge?p=@createlumina/text-component)](https://packagephobia.now.sh/result?p=@createlumina/text-component)
+[![npm](https://img.shields.io/npm/l/@createlumina/minecraft-launcher-core.svg)](https://github.com/CreateLumina/minecraft-utils/blob/master/LICENSE)
+[![Build Status](https://github.com/CreateLumina/minecraft-utils/workflows/Build/badge.svg)](https://github.com/CreateLumina/minecraft-utils/actions?query=workflow%3ABuild)
 
 Provide functions to parse Minecraft text component.
 
@@ -15,7 +17,7 @@ Provide functions to parse Minecraft text component.
 Create TextComponent from string OR Minecraft's formatted string, like `'§cThis is red'`:
 
 ```ts
-import { TextComponent, fromFormattedString } from "@xmcl/text-component";
+import { TextComponent, fromFormattedString } from '@createlumina/text-component';
 const formattedString: string;
 const fromFormatted: TextComponent = fromFormattedString(formattedString);
 ```
@@ -23,7 +25,7 @@ const fromFormatted: TextComponent = fromFormattedString(formattedString);
 Render the TextComponent to css:
 
 ```ts
-import { TextComponent, render, RenderNode } from "@xmcl/text-component";
+import { TextComponent, render, RenderNode } from '@createlumina/text-component';
 const yourComponent: TextComponent;
 const node: RenderNode = render(yourComponent);
 
@@ -40,13 +42,13 @@ function renderToDom(node: RenderNode) {
     for (const child of node.children) {
         span.appendChild(renderToDom(child));
     }
-} 
+}
 ```
 
 Iterate the TextComponent and its children:
 
 ```ts
-import { TextComponent, flat } from "@xmcl/text-component";
+import { TextComponent, flat } from '@createlumina/text-component';
 const yourComponent: TextComponent;
 const selfAndAllChildren: Array<TextComponent> = flat(yourComponent);
 ```

@@ -1,21 +1,23 @@
 # Client Module
 
-[![npm version](https://img.shields.io/npm/v/@xmcl/client.svg)](https://www.npmjs.com/package/@xmcl/client)
-[![Downloads](https://img.shields.io/npm/dm/@xmcl/client.svg)](https://npmjs.com/@xmcl/client)
-[![Install size](https://packagephobia.now.sh/badge?p=@xmcl/client)](https://packagephobia.now.sh/result?p=@xmcl/client)
-[![npm](https://img.shields.io/npm/l/@xmcl/minecraft-launcher-core.svg)](https://github.com/voxelum/minecraft-launcher-core-node/blob/master/LICENSE)
-[![Build Status](https://github.com/voxelum/minecraft-launcher-core-node/workflows/Build/badge.svg)](https://github.com/Voxelum/minecraft-launcher-core-node/actions?query=workflow%3ABuild)
+Version made for [Lumina](https://github.com/CreateLumina) projects. Original credits goes to [Voxelum/minecraft-launcher-core-node](https://github.com/Voxelum/minecraft-launcher-core-node)
+
+[![npm version](https://img.shields.io/npm/v/@createlumina/client.svg)](https://www.npmjs.com/package/@createlumina/client)
+[![Downloads](https://img.shields.io/npm/dm/@createlumina/client.svg)](https://npmjs.com/@createlumina/client)
+[![Install size](https://packagephobia.now.sh/badge?p=@createlumina/client)](https://packagephobia.now.sh/result?p=@createlumina/client)
+[![npm](https://img.shields.io/npm/l/@createlumina/minecraft-launcher-core.svg)](https://github.com/CreateLumina/minecraft-utils/blob/master/LICENSE)
+[![Build Status](https://github.com/CreateLumina/minecraft-utils/workflows/Build/badge.svg)](https://github.com/CreateLumina/minecraft-utils/actions?query=workflow%3ABuild)
 
 Minecraft socket pipeline utilities. Support Minecraft lan server discovery.
 
 ## Usage
 
-### Ping Minecraft Server  
+### Ping Minecraft Server
 
 Read sever info (server ip, port) and fetch its status (ping, server motd):
 
 ```ts
-import { queryStatus, Status, QueryOptions } from '@xmcl/client'
+import { queryStatus, Status, QueryOptions } from '@createlumina/client';
 const serverInfo = {
     host: 'your host',
     port: 25565, // be default
@@ -36,7 +38,7 @@ You can detect if player share LAN server.
 Or you can fake a LAN server.
 
 ```ts
-import { MinecraftLanDiscover, LanServerInfo } from '@xmcl/client'
+import { MinecraftLanDiscover, LanServerInfo } from '@createlumina/client';
 const discover = new MinecraftLanDiscover();
 
 await discover.bind(); // start to listen any lan server
@@ -44,18 +46,16 @@ await discover.bind(); // start to listen any lan server
 discover.on('discover', ({ motd, port }: LanServerInfo) => {
     console.log(motd); // server motd
     console.log(port); // server port
-})
+});
 
-const isReady = discover.isReady // a boolean represent whether the discover is ready to use
+const isReady = discover.isReady; // a boolean represent whether the discover is ready to use
 
 // you can also fake a lan server
 discover.broadcast({
     motd: 'your motd',
-    port: 2384 // fake port
+    port: 2384, // fake port
 });
 // fake LAN server is useful when you want to implement the P2P connection between two players
 
 dicover.destroy(); // stop listening
-
 ```
-

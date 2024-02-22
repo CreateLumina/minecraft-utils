@@ -1,10 +1,12 @@
 # Game Data
 
-[![npm version](https://img.shields.io/npm/v/@xmcl/world.svg)](https://www.npmjs.com/package/@xmcl/world)
-[![Downloads](https://img.shields.io/npm/dm/@xmcl/world.svg)](https://npmjs.com/@xmcl/world)
-[![Install size](https://packagephobia.now.sh/badge?p=@xmcl/world)](https://packagephobia.now.sh/result?p=@xmcl/world)
-[![npm](https://img.shields.io/npm/l/@xmcl/minecraft-launcher-core.svg)](https://github.com/voxelum/minecraft-launcher-core-node/blob/master/LICENSE)
-[![Build Status](https://github.com/voxelum/minecraft-launcher-core-node/workflows/Build/badge.svg)](https://github.com/Voxelum/minecraft-launcher-core-node/actions?query=workflow%3ABuild)
+Version made for [Lumina](https://github.com/CreateLumina) projects. Original credits goes to [Voxelum/minecraft-launcher-core-node](https://github.com/Voxelum/minecraft-launcher-core-node)
+
+[![npm version](https://img.shields.io/npm/v/@createlumina/world.svg)](https://www.npmjs.com/package/@createlumina/world)
+[![Downloads](https://img.shields.io/npm/dm/@createlumina/world.svg)](https://npmjs.com/@createlumina/world)
+[![Install size](https://packagephobia.now.sh/badge?p=@createlumina/world)](https://packagephobia.now.sh/result?p=@createlumina/world)
+[![npm](https://img.shields.io/npm/l/@createlumina/minecraft-launcher-core.svg)](https://github.com/CreateLumina/minecraft-utils/blob/master/LICENSE)
+[![Build Status](https://github.com/CreateLumina/minecraft-utils/workflows/Build/badge.svg)](https://github.com/CreateLumina/minecraft-utils/actions?query=workflow%3ABuild)
 
 Provides functions to parse Minecraft game data like level data, server data.
 
@@ -15,16 +17,16 @@ Provides functions to parse Minecraft game data like level data, server data.
 Read the level info from a buffer.
 
 ```ts
-import { WorldReader, LevelDataFrame } from '@xmcl/game-data'
+import { WorldReader, LevelDataFrame } from '@createlumina/game-data';
 const worldSaveFolder: string;
 const reader: WorldReader = await WorldReader.create(worldSaveFolder);
 const levelData: LevelDataFrame = await reader.getLevelData();
 ```
 
-***Preview*** Read the region data, this feature is not tested yet, but the api will look like this
+**_Preview_** Read the region data, this feature is not tested yet, but the api will look like this
 
 ```ts
-import { WorldReader, RegionDataFrame, RegionReader } from "@xmcl/game-data";
+import { WorldReader, RegionDataFrame, RegionReader } from '@createlumina/game-data';
 const worldSaveFolder: string;
 const reader: WorldReader = await WorldReader.create(worldSaveFolder);
 const chunkX: number;
@@ -44,7 +46,7 @@ In code, they are represented by `LevelDataFrame`.
 
 ### Region
 
-The Minecraft blocks data are stored in region file (.mca). One region contains 16 sections. Each section contains 16x16x16 blockstates, biome, entities, tileentities and other data. 
+The Minecraft blocks data are stored in region file (.mca). One region contains 16 sections. Each section contains 16x16x16 blockstates, biome, entities, tileentities and other data.
 
 For the Minecraft version < 1.13, the mca NBT data store the **global** blockstate ids in `Data` and `Blocks` fields.
 
@@ -54,11 +56,10 @@ For the Minecraft version >= 1.13, the mca NBT data store the **local** blocksta
 
 One chunk (section) in region contains 4096 (16x16x16) blockstates, and they are indexed by [0, 4096). The mapping from x, y, z to index is `(x, y, z) -> y << 8 | z << 4 | x`.
 
-
 ### Read and Write Server Info
 
 ```ts
-import { readInfo, writeInfo, ServerInfo } from "@xmcl/game-data";
+import { readInfo, writeInfo, ServerInfo } from '@createlumina/game-data';
 
 const seversDatBuffer: Buffer; // this is the servers.dat under .minecraft folder
 const infos: ServerInfo[] = await readServerInfo(seversDatBuffer);

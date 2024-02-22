@@ -33,15 +33,15 @@ Looking for Deno version? Check out [discord_rpc_deno](https://github.com/xhaype
 ## Example
 
 ```ts
-import { Client } from "@xhayper/discord-rpc";
+import { Client } from '@xhayper/discord-rpc';
 
 const client = new Client({
-    clientId: "123456789012345678"
+    clientId: '123456789012345678',
 });
 
-client.on("ready", () => {
+client.on('ready', () => {
     client.user?.setActivity({
-        state: "Hello, world!"
+        state: 'Hello, world!',
     });
 });
 

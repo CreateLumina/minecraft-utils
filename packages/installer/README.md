@@ -1,10 +1,12 @@
 # Installer Module
 
-[![npm version](https://img.shields.io/npm/v/@xmcl/installer.svg)](https://www.npmjs.com/package/@xmcl/installer)
-[![Downloads](https://img.shields.io/npm/dm/@xmcl/installer.svg)](https://npmjs.com/@xmcl/installer)
-[![Install size](https://packagephobia.now.sh/badge?p=@xmcl/installer)](https://packagephobia.now.sh/result?p=@xmcl/installer)
-[![npm](https://img.shields.io/npm/l/@xmcl/minecraft-launcher-core.svg)](https://github.com/voxelum/minecraft-launcher-core-node/blob/master/LICENSE)
-[![Build Status](https://github.com/voxelum/minecraft-launcher-core-node/workflows/Build/badge.svg)](https://github.com/Voxelum/minecraft-launcher-core-node/actions?query=workflow%3ABuild)
+Version made for [Lumina](https://github.com/CreateLumina) projects. Original credits goes to [Voxelum/minecraft-launcher-core-node](https://github.com/Voxelum/minecraft-launcher-core-node)
+
+[![npm version](https://img.shields.io/npm/v/@createlumina/installer.svg)](https://www.npmjs.com/package/@createlumina/installer)
+[![Downloads](https://img.shields.io/npm/dm/@createlumina/installer.svg)](https://npmjs.com/@createlumina/installer)
+[![Install size](https://packagephobia.now.sh/badge?p=@createlumina/installer)](https://packagephobia.now.sh/result?p=@createlumina/installer)
+[![npm](https://img.shields.io/npm/l/@createlumina/minecraft-launcher-core.svg)](https://github.com/CreateLumina/minecraft-utils/blob/master/LICENSE)
+[![Build Status](https://github.com/CreateLumina/minecraft-utils/workflows/Build/badge.svg)](https://github.com/CreateLumina/minecraft-utils/actions?query=workflow%3ABuild)
 
 Provide functions to install Minecraft client, libraries, and assets.
 
@@ -15,8 +17,8 @@ Provide functions to install Minecraft client, libraries, and assets.
 Fully install vanilla minecraft client including assets and libs.
 
 ```ts
-import { getVersionList, MinecraftVersion, install } from "@xmcl/installer";
-import { MinecraftLocation } from "@xmcl/core";
+import { getVersionList, MinecraftVersion, install } from '@createlumina/installer';
+import { MinecraftLocation } from '@createlumina/core';
 
 const minecraft: MinecraftLocation;
 const list: MinecraftVersion[] = (await getVersionList()).versions;
@@ -27,8 +29,8 @@ await install(aVersion, minecraft);
 Just install libraries:
 
 ```ts
-import { installLibraries } from "@xmcl/installer";
-import { ResolvedVersion, MinecraftLocation, Version } from "@xmcl/core";
+import { installLibraries } from '@createlumina/installer';
+import { ResolvedVersion, MinecraftLocation, Version } from '@createlumina/core';
 
 const minecraft: MinecraftLocation;
 const version: string; // version string like 1.13
@@ -39,8 +41,8 @@ await installLibraries(resolvedVersion);
 Just install assets:
 
 ```ts
-import { installAssets } from "@xmcl/installer";
-import { MinecraftLocation, ResolvedVersion, Version } from "@xmcl/core";
+import { installAssets } from '@createlumina/installer';
+import { MinecraftLocation, ResolvedVersion, Version } from '@createlumina/core';
 
 const minecraft: MinecraftLocation;
 const version: string; // version string like 1.13
@@ -51,8 +53,8 @@ await installAssets(resolvedVersion);
 Just ensure all assets and libraries are installed:
 
 ```ts
-import { installDependencies } from "@xmcl/installer";
-import { MinecraftLocation, ResolvedVersion, Version } from "@xmcl/core";
+import { installDependencies } from '@createlumina/installer';
+import { MinecraftLocation, ResolvedVersion, Version } from '@createlumina/core';
 
 const minecraft: MinecraftLocation;
 const version: string; // version string like 1.13
@@ -65,17 +67,18 @@ await installDependencies(resolvedVersion);
 The library is using undici as the backbone of http request. It's a very fast http client. But it's also very aggressive. It will create a lot of connections to the server. If you want to limit the concurrency of the installation, you want to create your own undici `Dispatcher` to handle the request.
 
 ```ts
-import { Dispatcher, Agent } from "undici";
+import { Dispatcher, Agent } from 'undici';
 
 const agent = new Agent({
-    connection: 16 // only 16 connection (socket) we should create at most
+    connection: 16, // only 16 connection (socket) we should create at most
     // you can have other control here.
 });
 
-await installAssets(resolvedVersion, { 
-  agent: { // notice this is the DownloadAgent from `@xmcl/file-transfer`
-    dispatcher: agent // this is the undici Dispatcher option
-  }
+await installAssets(resolvedVersion, {
+    agent: {
+        // notice this is the DownloadAgent from `@createlumina/file-transfer`
+        dispatcher: agent, // this is the undici Dispatcher option
+    },
 });
 ```
 
@@ -85,7 +88,7 @@ There are other type of `Dispatcher`, like `Pool`, `Client`, `ProxyAgent`. You c
 
 Most install function has a corresponding task function. For example, `install` function has the function name `installTask` which is the task version monitor the progress of install.
 
-Here is the example of just moniting the install task overall progress: 
+Here is the example of just moniting the install task overall progress:
 
 ```ts
 // suppose you have define such functions to update UI
@@ -100,7 +103,7 @@ await installAllTask.startAndWait({
         // a task start
         // task.path show the path
         // task.name is the name
-        trackTask(task)
+        trackTask(task);
     },
     onUpdate(task: Task<any>, chunkSize: number) {
         // a task update
@@ -122,30 +125,26 @@ await installAllTask.startAndWait({
         setTaskToSuccess(task);
     },
     // on task is paused/resumed/cancelled
-    onPaused(task: Task<any>) {
-    },
-    onResumed(task: Task<any>) {
-    },
-    onCancelled(task: Task<any>) {
-    },
+    onPaused(task: Task<any>) {},
+    onResumed(task: Task<any>) {},
+    onCancelled(task: Task<any>) {},
 });
-
 ```
 
 The task is designed to organize the all the works in a tree like structure.
 
 The `installTask` has such parent/child structure
 
-- install
-  - version
-    - json
-    - jar
-  - dependencies
-    - assets
-      - assetsJson
-      - asset
-    - libraries
-      - library
+-   install
+    -   version
+        -   json
+        -   jar
+    -   dependencies
+        -   assets
+            -   assetsJson
+            -   asset
+        -   libraries
+            -   library
 
 To generally display this tree in UI. You can identify the task by its `path`.
 
@@ -174,7 +173,7 @@ function runTask(rootTask: Task<any>) {
             trackTask(`${uid}.${task.id}`, getTaskName(task));
         },
         onUpdate(task: Task<any>, chunkSize: number) {
-            // update the total progress 
+            // update the total progress
             updateTaskProgress(`${uid}.${task.id}`, installAllTask.progress, installAllTask.total);
         },
         onStart(task: Task<any>) {
@@ -183,7 +182,6 @@ function runTask(rootTask: Task<any>) {
         },
     });
 }
-
 ```
 
 ### Install Library/Assets with Customized Host
@@ -197,11 +195,11 @@ For example, if you want to download the library `commons-io:commons-io:2.5` fro
 // this option will also work for other functions involving libraries like `install`, `installDependencies`.
 await installLibraries(resolvedVersion, {
     libraryHost(library: ResolvedLibrary) {
-        if (library.name === "commons-io:commons-io:2.5") {
+        if (library.name === 'commons-io:commons-io:2.5') {
             // the downloader will first try the first url in the array
             // if this failed, it will try the 2nd.
             // if it's still failed, it will try original url
-            return ["https://your-host.org/the/path/to/the/jar", "your-sencodary-url"];
+            return ['https://your-host.org/the/path/to/the/jar', 'your-sencodary-url'];
             // if you just have one url
             // just return a string here...
         }
@@ -218,19 +216,19 @@ To swap the assets host, you can just assign the assets host url to the options
 
 ```ts
 await installAssets(resolvedVersion, {
-    assetsHost: "https://www.your-url/assets"
+    assetsHost: 'https://www.your-url/assets',
 });
 ```
 
-The assets host should accept the get asset request like `GET https://www.your-url/assets/<hash-head>/<hash>`, where `hash-head` is the first two char in `<hash>`. The `<hash>` is the sha1 of the asset. 
+The assets host should accept the get asset request like `GET https://www.your-url/assets/<hash-head>/<hash>`, where `hash-head` is the first two char in `<hash>`. The `<hash>` is the sha1 of the asset.
 
 ### Install Forge
 
-Get the forge version info and install forge from it. 
+Get the forge version info and install forge from it.
 
 ```ts
-import { installForge, getForgeVersionList, ForgeVersionList, ForgeVersion } from "@xmcl/installer";
-import { MinecraftLocation } from "@xmcl/core";
+import { installForge, getForgeVersionList, ForgeVersionList, ForgeVersion } from '@createlumina/installer';
+import { MinecraftLocation } from '@createlumina/core';
 
 const list: ForgeVersionList = await getForgeVersionList();
 const minecraftLocation: MinecraftLocation;
@@ -242,7 +240,7 @@ await installForge(firstVersionOnPage, minecraftLocation);
 If you know forge version and minecraft version. You can directly do such:
 
 ```ts
-import { installForge } from "@xmcl/installer";
+import { installForge } from '@createlumina/installer';
 
 const forgeVersion = 'a-forge-version'; // like 31.1.27
 await installForge({ version: forgeVersion, mcversion: '1.15.2' }, minecraftLocation);
@@ -251,7 +249,7 @@ await installForge({ version: forgeVersion, mcversion: '1.15.2' }, minecraftLoca
 Notice that this installation doesn't ensure full libraries installation.
 Please run `installDependencies` afther that.
 
-The new 1.13 forge installation process requires java to run. 
+The new 1.13 forge installation process requires java to run.
 Either you have `java` executable in your environment variable PATH,
 or you can assign java location by `installForge(forgeVersionMeta, minecraftLocation, { java: yourJavaExecutablePath });`.
 
@@ -263,7 +261,7 @@ Consider support him to maintains forge.
 Fetch the new fabric version list.
 
 ```ts
-import { installFabric, FabricArtifactVersion } from "@xmcl/installer";
+import { installFabric, FabricArtifactVersion } from '@createlumina/installer';
 
 const versionList: FabricArtifactVersion[] = await getFabricArtifactList();
 ```
@@ -279,19 +277,19 @@ Please run `Installer.installDependencies` after that to install fully.
 
 ## New Forge Installing process
 
-The module have three stage for installing new forge *(mcversion >= 1.13)*
+The module have three stage for installing new forge _(mcversion >= 1.13)_
 
 1. Deploy forge installer jar
-   1. Download installer jar
-   2. Extract forge universal jar files in installer jar into `.minecraft/libraries`
-   3. Extract `version.json` into target version folder, `.minecraft/versions/<ver>/<ver>.json`
-   4. Extract `installer_profile.json` into target version folder, `.minecraft/versions/<ver>/installer_profile.json`
+    1. Download installer jar
+    2. Extract forge universal jar files in installer jar into `.minecraft/libraries`
+    3. Extract `version.json` into target version folder, `.minecraft/versions/<ver>/<ver>.json`
+    4. Extract `installer_profile.json` into target version folder, `.minecraft/versions/<ver>/installer_profile.json`
 2. Download Dependencies
-   1. Merge libraires in `installer_profile.json` and `<ver>.json`
-   2. Download them
+    1. Merge libraires in `installer_profile.json` and `<ver>.json`
+    2. Download them
 3. Post processing forge jar
-   1. Parse `installer_profile.json`
-   2. Get the processors info and execute all of them.
+    1. Parse `installer_profile.json`
+    2. Get the processors info and execute all of them.
 
 The `installForge` will do all of them.
 
@@ -302,7 +300,7 @@ The `installByProfile` will do 2 and 3.
 Scan java installation path from the disk. (Require a lzma unpacker, like [7zip-bin](https://www.npmjs.com/package/7zip-bin) or [lzma-native](https://www.npmjs.com/package/lzma-native))
 
 ```ts
-import { installJreFromMojang } from "@xmcl/installer";
+import { installJreFromMojang } from '@createlumina/installer';
 
 // this require a unpackLZMA util to work
 // you can use `7zip-bin`
@@ -310,7 +308,7 @@ import { installJreFromMojang } from "@xmcl/installer";
 const unpackLZMA: (src: string, dest: string) => Promise<void>;
 
 await installJreFromMojang({
-    destination: "your/java/home",
+    destination: 'your/java/home',
     unpackLZMA,
 });
 ```

@@ -1,12 +1,14 @@
 # User Module
 
-[![npm version](https://img.shields.io/npm/v/@xmcl/user.svg)](https://www.npmjs.com/package/@xmcl/user)
-[![Downloads](https://img.shields.io/npm/dm/@xmcl/user.svg)](https://npmjs.com/@xmcl/user)
-[![Install size](https://packagephobia.now.sh/badge?p=@xmcl/user)](https://packagephobia.now.sh/result?p=@xmcl/user)
-[![Downloads](https://img.shields.io/npm/dm/@xmcl/user.svg)](https://npmjs.com/@xmcl/user)
-[![Install size](https://packagephobia.now.sh/badge?p=@xmcl/user)](https://packagephobia.now.sh/result?p=@xmcl/user)
-[![npm](https://img.shields.io/npm/l/@xmcl/minecraft-launcher-core.svg)](https://github.com/voxelum/minecraft-launcher-core-node/blob/master/LICENSE)
-[![Build Status](https://github.com/voxelum/minecraft-launcher-core-node/workflows/Build/badge.svg)](https://github.com/Voxelum/minecraft-launcher-core-node/actions?query=workflow%3ABuild)
+Version made for [Lumina](https://github.com/CreateLumina) projects. Original credits goes to [Voxelum/minecraft-launcher-core-node](https://github.com/Voxelum/minecraft-launcher-core-node)
+
+[![npm version](https://img.shields.io/npm/v/@createlumina/user.svg)](https://www.npmjs.com/package/@createlumina/user)
+[![Downloads](https://img.shields.io/npm/dm/@createlumina/user.svg)](https://npmjs.com/@createlumina/user)
+[![Install size](https://packagephobia.now.sh/badge?p=@createlumina/user)](https://packagephobia.now.sh/result?p=@createlumina/user)
+[![Downloads](https://img.shields.io/npm/dm/@createlumina/user.svg)](https://npmjs.com/@createlumina/user)
+[![Install size](https://packagephobia.now.sh/badge?p=@createlumina/user)](https://packagephobia.now.sh/result?p=@createlumina/user)
+[![npm](https://img.shields.io/npm/l/@createlumina/minecraft-launcher-core.svg)](https://github.com/CreateLumina/minecraft-utils/blob/master/LICENSE)
+[![Build Status](https://github.com/CreateLumina/minecraft-utils/workflows/Build/badge.svg)](https://github.com/CreateLumina/minecraft-utils/actions?query=workflow%3ABuild)
 
 Provide Yggdrasil auth and profile service for Minecraft protocol.
 
@@ -26,15 +28,15 @@ Overall, according to the [wiki.vg](https://wiki.vg/Microsoft_Authentication_Sch
 
 The library does not cover the first step.
 
-- For nodejs, you can use [msal-node](https://www.npmjs.com/package/@azure/msal-node) to implement 1st step.
-- For browser, you can use [msal-browser](https://www.npmjs.com/package/@azure/msal-browser) to implement 1st step.
+-   For nodejs, you can use [msal-node](https://www.npmjs.com/package/@azure/msal-node) to implement 1st step.
+-   For browser, you can use [msal-browser](https://www.npmjs.com/package/@azure/msal-browser) to implement 1st step.
 
 If you want a reference, [this](https://github.com/voxelum/x-minecraft-launcher/blob/master/xmcl-runtime/lib/clients/MicrosoftOAuthClient.ts) is the live example for nodejs/electron using msal-node.
 
 Here we only demo the case you already got the Microsoft access token.
 
 ```ts
-import { MicrosoftAuthenticator } from '@xmcl/user'
+import { MicrosoftAuthenticator } from '@createlumina/user'
 
 const authenticator = new MicrosoftAuthenticator();
 
@@ -63,7 +65,7 @@ The legacy mojang auth server, `https://authserver.mojang.com` is also a yggdras
 but it is not recommended to use it.
 
 ```ts
-import { YggdrasilClient, YggrasilAuthentication } from "@xmcl/user";
+import { YggdrasilClient, YggrasilAuthentication } from '@createlumina/user';
 
 const client = new YggdrasilClient('http://random.authserver');
 const username: string;
@@ -86,7 +88,7 @@ The [authlib-injector]() also implements several API for user skin operation.
 We also support these API:
 
 ```ts
-import { YggdrasilThirdPartyClient } from "@xmcl/user";
+import { YggdrasilThirdPartyClient } from '@createlumina/user';
 
 const client = new YggdrasilThirdPartyClient('http://random.authserver');
 
@@ -102,22 +104,21 @@ const isSlim: boolean = GameProfile.Texture.isSlim(skin); // determine if model 
 // set user skin
 const accessToken: string;
 const skinUrl: string;
-await client.setTexture({ accessToken, uuid, type: "skin", texture: { url: skinUrl } });
+await client.setTexture({ accessToken, uuid, type: 'skin', texture: { url: skinUrl } });
 
 // set user skin via binary
 const skinData: Uint8Array;
-await client.setTexture({ accessToken, uuid, type: "skin", texture: { data: skinData } });
-
+await client.setTexture({ accessToken, uuid, type: 'skin', texture: { data: skinData } });
 ```
 
 ### Offline
 
 ```ts
-import { offline } from "@xmcl/user";
+import { offline } from '@createlumina/user';
 
 // create a offline user
-const offlineUser = offline("username");
+const offlineUser = offline('username');
 
 // create an offline user with uuid
-const offlineUser1 = offline("username", "uuid");
+const offlineUser1 = offline('username', 'uuid');
 ```

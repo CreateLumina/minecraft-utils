@@ -1,5 +1,5 @@
 /**
- * @module @xmcl/game-data
+ * @module @createlumina/game-data
  */
-export * from './level'
-export * from './serverDat'
+export * from './level';
+export * from './serverDat';

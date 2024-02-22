@@ -27,21 +27,21 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @module @xmcl/asm
+ * @module @createlumina/asm
  *
  */
 
-export * from './libs/AnnotationVisitor'
-export * from './libs/Attribute'
-export * from './libs/ClassReader'
-export * from './libs/ClassVisitor'
+export * from './libs/AnnotationVisitor';
+export * from './libs/Attribute';
+export * from './libs/ClassReader';
+export * from './libs/ClassVisitor';
 // import { ClassWriter } from './src/ClassWriter'
-export * from './libs/FieldVisitor'
+export * from './libs/FieldVisitor';
 // import { FieldWriter } from './src/FieldWriter'
-export * from './libs/Handle'
-export * from './libs/Label'
-export * from './libs/MethodVisitor'
-export * from './libs/Opcodes'
-export * from './libs/Type'
-export * from './libs/TypePath'
-export * from './libs/TypeReference'
+export * from './libs/Handle';
+export * from './libs/Label';
+export * from './libs/MethodVisitor';
+export * from './libs/Opcodes';
+export * from './libs/Type';
+export * from './libs/TypePath';
+export * from './libs/TypeReference';

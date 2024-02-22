@@ -4,14 +4,12 @@
  * and the {@link launch} function to launch the game.
  *
  * @packageDocumentation
- * @module @xmcl/core
+ * @module @createlumina/core
  */
 
-export * from './launch'
-export * from './version'
-export * from './platform'
-export * from './folder'
-export * from './diagnose'
-export {
-  checksum,
-} from './utils'
+export * from './launch';
+export * from './version';
+export * from './platform';
+export * from './folder';
+export * from './diagnose';
+export { checksum } from './utils';

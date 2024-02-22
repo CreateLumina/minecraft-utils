@@ -1,109 +1,109 @@
-import { type TypedEmitter } from '../utils/TypedEmitter'
-import { EventEmitter } from 'node:events'
-import type { Client } from '../Client'
+import { type TypedEmitter } from '../utils/TypedEmitter';
+import { EventEmitter } from 'node:events';
+import type { Client } from '../Client';
 
 export enum RPC_CLOSE_CODE {
-  RPC_CLOSE_NORMAL = 1000,
-  RPC_CLOSE_UNSUPPORTED = 1003,
-  RPC_CLOSE_ABNORMAL = 1006,
+    RPC_CLOSE_NORMAL = 1000,
+    RPC_CLOSE_UNSUPPORTED = 1003,
+    RPC_CLOSE_ABNORMAL = 1006,
 
-  /**
+    /**
      * You connected to the RPC server with an invalid client ID.
      */
-  RPC_CLOSE_INVALID_CLIENT_ID = 4000,
-  /**
+    RPC_CLOSE_INVALID_CLIENT_ID = 4000,
+    /**
      * You connected to the RPC server with an invalid origin.
      */
-  RPC_CLOSE_INVALID_ORIGIN = 4001,
-  /**
+    RPC_CLOSE_INVALID_ORIGIN = 4001,
+    /**
      * You are being rate limited.
      */
-  RPC_CLOSE_RATE_LIMITED = 4002,
-  /**
+    RPC_CLOSE_RATE_LIMITED = 4002,
+    /**
      * The OAuth2 token associated with a connection was revoked, get a new one!
      */
-  RPC_CLOSE_TOKEN_REVOKED = 4003,
-  /**
+    RPC_CLOSE_TOKEN_REVOKED = 4003,
+    /**
      * The RPC Server version specified in the connection string was not valid.
      */
-  RPC_CLOSE_INVALID_VERSION = 4004,
-  /**
+    RPC_CLOSE_INVALID_VERSION = 4004,
+    /**
      * The encoding specified in the connection string was not valid
      */
-  RPC_CLOSE_INVALID_ENCODING = 4005,
+    RPC_CLOSE_INVALID_ENCODING = 4005,
 }
 
 export enum RPC_ERROR_CODE {
-  /**
+    /**
      * An unknown error occurred.
      */
-  RPC_UNKNOWN_ERROR = 1000,
-  /**
+    RPC_UNKNOWN_ERROR = 1000,
+    /**
      * You sent an invalid payload.
      */
-  RPC_INVALID_PAYLOAD = 4000,
-  /**
+    RPC_INVALID_PAYLOAD = 4000,
+    /**
      * Invalid command name specified.
      */
-  RPC_INVALID_COMMAND = 4002,
-  /**
+    RPC_INVALID_COMMAND = 4002,
+    /**
      * Invalid guild ID specified.
      */
-  RPC_INVALID_GUILD = 4003,
-  /**
+    RPC_INVALID_GUILD = 4003,
+    /**
      * Invalid event name specified.
      */
-  RPC_INVALID_EVENT = 4004,
-  /**
+    RPC_INVALID_EVENT = 4004,
+    /**
      * Invalid channel ID specified.
      */
-  RPC_INVALID_CHANNEL = 4005,
-  /**
+    RPC_INVALID_CHANNEL = 4005,
+    /**
      * You lack permissions to access the given resource.
      */
-  RPC_INVALID_PERMISSION = 4006,
-  /**
+    RPC_INVALID_PERMISSION = 4006,
+    /**
      * An invalid OAuth2 application ID was used to authorize or authenticate with.
      */
-  RPC_INVALID_CLIENT_ID = 4007,
-  /**
+    RPC_INVALID_CLIENT_ID = 4007,
+    /**
      * An invalid OAuth2 application origin was used to authorize or authenticate with.
      */
-  RPC_INVALID_ORIGIN = 4008,
-  /**
+    RPC_INVALID_ORIGIN = 4008,
+    /**
      * An invalid OAuth2 token was used to authorize or authenticate with.
      */
-  RPC_INVALID_TOKEN = 4009,
-  /**
+    RPC_INVALID_TOKEN = 4009,
+    /**
      * The specified user ID was invalid.
      */
-  RPC_INVALID_USER = 4010,
-  /**
+    RPC_INVALID_USER = 4010,
+    /**
      * A standard OAuth2 error occurred; check the data object for the OAuth2 error details.
      */
-  RPC_OAUTH2_ERROR = 5000,
-  /**
+    RPC_OAUTH2_ERROR = 5000,
+    /**
      * An asynchronous `SELECT_TEXT_CHANNEL`/`SELECT_VOICE_CHANNEL` command timed out.
      */
-  RPC_SELECT_CHANNEL_TIMEOUT = 5001,
-  /**
+    RPC_SELECT_CHANNEL_TIMEOUT = 5001,
+    /**
      * An asynchronous `GET_GUILD` command timed out.
      */
-  RPC_GET_GUILD_TIMEOUT = 5002,
-  /**
+    RPC_GET_GUILD_TIMEOUT = 5002,
+    /**
      * You tried to join a user to a voice channel but the user was already in one.
      */
-  RPC_SELECT_VOICE_FORCE_REQUIRED = 5003,
-  /**
+    RPC_SELECT_VOICE_FORCE_REQUIRED = 5003,
+    /**
      * You tried to capture more than one shortcut key at once.
      */
-  RPC_CAPTURE_SHORTCUT_ALREADY_LISTENING = 5004,
+    RPC_CAPTURE_SHORTCUT_ALREADY_LISTENING = 5004,
 }
 
 export enum CUSTOM_RPC_ERROR_CODE {
-  RPC_CONNECTION_ENDED,
-  RPC_CONNECTION_TIMEOUT,
-  RPC_COULD_NOT_CONNECT,
+    RPC_CONNECTION_ENDED,
+    RPC_CONNECTION_TIMEOUT,
+    RPC_COULD_NOT_CONNECT,
 }
 
 export type RPC_CMD =
@@ -179,7 +179,7 @@ export type RPC_CMD =
     | 'OPEN_EXTERNAL_LINK'
     | 'CAPTURE_LOG'
     | 'ENCOURAGE_HW_ACCELERATION'
-    | 'SET_ORIENTATION_LOCK_STATE'
+    | 'SET_ORIENTATION_LOCK_STATE';
 
 export type RPC_EVT =
     | 'CURRENT_USER_UPDATE'
@@ -221,61 +221,61 @@ export type RPC_EVT =
     | 'VOICE_CHANNEL_EFFECT_SEND'
     | 'THERMAL_STATE_UPDATE'
     | 'READY'
-    | 'ERROR'
+    | 'ERROR';
 
 export interface CommandOutgoing<A = any> {
-  cmd: RPC_CMD
-  nonce: string | null
-  args: A
-  evt?: RPC_EVT
+    cmd: RPC_CMD;
+    nonce: string | null;
+    args: A;
+    evt?: RPC_EVT;
 }
 
 export interface CommandIncoming<A = any, D = any> {
-  cmd: RPC_CMD
-  nonce: string | null
-  args?: A
-  data: D
-  evt?: RPC_EVT
+    cmd: RPC_CMD;
+    nonce: string | null;
+    args?: A;
+    data: D;
+    evt?: RPC_EVT;
 }
 
 export type TransportEvents = {
-  /**
+    /**
      * @event
      */
-  message: (message: CommandIncoming) => void
-  /**
+    message: (message: CommandIncoming) => void;
+    /**
      * @event
      */
-  ping: () => void
-  /**
+    ping: () => void;
+    /**
      * @event
      */
-  open: () => void
-  /**
+    open: () => void;
+    /**
      * @event
      */
-  close: (reason?: string | { code: number; message: string }) => void
-}
+    close: (reason?: string | { code: number; message: string }) => void;
+};
 
 export type TransportOptions = {
-  client: Client
-}
+    client: Client;
+};
 
 export abstract class Transport extends (EventEmitter as new () => TypedEmitter<TransportEvents>) {
-  readonly client: Client
+    readonly client: Client;
 
-  get isConnected(): boolean {
-    return false
-  }
+    get isConnected(): boolean {
+        return false;
+    }
 
-  constructor(options: TransportOptions) {
-    // eslint-disable-next-line constructor-super
-    super()
-    this.client = options.client
-  }
+    constructor(options: TransportOptions) {
+        // eslint-disable-next-line constructor-super
+        super();
+        this.client = options.client;
+    }
 
-  abstract connect(): Promise<void>
-  abstract send(data?: any): void
-  abstract ping(): void
-  abstract close(): Promise<void>
+    abstract connect(): Promise<void>;
+    abstract send(data?: any): void;
+    abstract ping(): void;
+    abstract close(): Promise<void>;
 }

@@ -41,462 +41,461 @@
  * @author Eugene Kuleshov
  */
 export enum Opcodes {
+    ASM4 = (4 << 16) | (0 << 8) | 0,
 
-   ASM4 = 4 << 16 | 0 << 8 | 0,
+    ASM5 = (5 << 16) | (0 << 8) | 0,
 
-   ASM5 = 5 << 16 | 0 << 8 | 0,
+    V1_1 = (3 << 16) | 45,
 
-   V1_1 = 3 << 16 | 45,
+    V1_2 = (0 << 16) | 46,
 
-   V1_2 = 0 << 16 | 46,
+    V1_3 = (0 << 16) | 47,
 
-   V1_3 = 0 << 16 | 47,
+    V1_4 = (0 << 16) | 48,
 
-   V1_4 = 0 << 16 | 48,
+    V1_5 = (0 << 16) | 49,
 
-   V1_5 = 0 << 16 | 49,
+    V1_6 = (0 << 16) | 50,
 
-   V1_6 = 0 << 16 | 50,
+    V1_7 = (0 << 16) | 51,
 
-   V1_7 = 0 << 16 | 51,
+    V1_8 = (0 << 16) | 52,
 
-   V1_8 = 0 << 16 | 52,
+    ACC_PUBLIC = 1,
 
-   ACC_PUBLIC = 1,
+    ACC_PRIVATE = 2,
 
-   ACC_PRIVATE = 2,
+    ACC_PROTECTED = 4,
 
-   ACC_PROTECTED = 4,
+    ACC_STATIC = 8,
 
-   ACC_STATIC = 8,
+    ACC_FINAL = 16,
 
-   ACC_FINAL = 16,
+    ACC_SUPER = 32,
 
-   ACC_SUPER = 32,
+    ACC_SYNCHRONIZED = 32,
 
-   ACC_SYNCHRONIZED = 32,
+    ACC_VOLATILE = 64,
 
-   ACC_VOLATILE = 64,
+    ACC_BRIDGE = 64,
 
-   ACC_BRIDGE = 64,
+    ACC_VARARGS = 128,
 
-   ACC_VARARGS = 128,
+    ACC_TRANSIENT = 128,
 
-   ACC_TRANSIENT = 128,
+    ACC_NATIVE = 256,
 
-   ACC_NATIVE = 256,
+    ACC_INTERFACE = 512,
 
-   ACC_INTERFACE = 512,
+    ACC_ABSTRACT = 1024,
 
-   ACC_ABSTRACT = 1024,
+    ACC_STRICT = 2048,
 
-   ACC_STRICT = 2048,
+    ACC_SYNTHETIC = 4096,
 
-   ACC_SYNTHETIC = 4096,
+    ACC_ANNOTATION = 8192,
 
-   ACC_ANNOTATION = 8192,
+    ACC_ENUM = 16384,
 
-   ACC_ENUM = 16384,
+    ACC_MANDATED = 32768,
 
-   ACC_MANDATED = 32768,
+    ACC_DEPRECATED = 131072,
 
-   ACC_DEPRECATED = 131072,
+    T_BOOLEAN = 4,
 
-   T_BOOLEAN = 4,
+    T_CHAR = 5,
 
-   T_CHAR = 5,
+    T_FLOAT = 6,
 
-   T_FLOAT = 6,
+    T_DOUBLE = 7,
 
-   T_DOUBLE = 7,
+    T_BYTE = 8,
 
-   T_BYTE = 8,
+    T_SHORT = 9,
 
-   T_SHORT = 9,
+    T_INT = 10,
 
-   T_INT = 10,
+    T_LONG = 11,
 
-   T_LONG = 11,
+    H_GETFIELD = 1,
 
-   H_GETFIELD = 1,
+    H_GETSTATIC = 2,
 
-   H_GETSTATIC = 2,
+    H_PUTFIELD = 3,
 
-   H_PUTFIELD = 3,
+    H_PUTSTATIC = 4,
 
-   H_PUTSTATIC = 4,
+    H_INVOKEVIRTUAL = 5,
 
-   H_INVOKEVIRTUAL = 5,
+    H_INVOKESTATIC = 6,
 
-   H_INVOKESTATIC = 6,
+    H_INVOKESPECIAL = 7,
 
-   H_INVOKESPECIAL = 7,
+    H_NEWINVOKESPECIAL = 8,
 
-   H_NEWINVOKESPECIAL = 8,
+    H_INVOKEINTERFACE = 9,
 
-   H_INVOKEINTERFACE = 9,
-
-  /**
+    /**
      * Represents an expanded frame. See {@link ClassReader#EXPAND_FRAMES}.
      */
-   F_NEW = -1,
+    F_NEW = -1,
 
-  /**
+    /**
      * Represents a compressed frame with compe frame data.,
      */
-   F_FULL = 0,
+    F_FULL = 0,
 
-  /**
+    /**
      * Represents a compressed frame where locals are the same as the locals in
      * the previous frame, except that additional 1-3 locals are defined, and
      * with an empty stack.
      */
-   F_APPEND = 1,
+    F_APPEND = 1,
 
-  /**
+    /**
      * Represents a compressed frame where locals are the same as the locals in
      * the previous frame, except that the last 1-3 locals are absent and with
      * an empty stack.
      */
-   F_CHOP = 2,
+    F_CHOP = 2,
 
-  /**
+    /**
      * Represents a compressed frame with exactly the same locals as the
      * previous frame and with an empty stack.
      */
-   F_SAME = 3,
+    F_SAME = 3,
 
-  /**
+    /**
      * Represents a compressed frame with exactly the same locals as the
      * previous frame and with a single value on the stack.
      */
-   F_SAME1 = 4,
+    F_SAME1 = 4,
 
-   TOP = 0,
+    TOP = 0,
 
-   INTEGER = 1,
+    INTEGER = 1,
 
-   FLOAT = 2,
+    FLOAT = 2,
 
-   DOUBLE = 3,
+    DOUBLE = 3,
 
-   LONG = 4,
+    LONG = 4,
 
-   NULL = 5,
+    NULL = 5,
 
-   UNINITIALIZED_THIS = 6,
+    UNINITIALIZED_THIS = 6,
 
-   NOP = 0,
+    NOP = 0,
 
-   ACONST_NULL = 1,
+    ACONST_NULL = 1,
 
-   ICONST_M1 = 2,
+    ICONST_M1 = 2,
 
-   ICONST_0 = 3,
+    ICONST_0 = 3,
 
-   ICONST_1 = 4,
+    ICONST_1 = 4,
 
-   ICONST_2 = 5,
+    ICONST_2 = 5,
 
-   ICONST_3 = 6,
+    ICONST_3 = 6,
 
-   ICONST_4 = 7,
+    ICONST_4 = 7,
 
-   ICONST_5 = 8,
+    ICONST_5 = 8,
 
-   LCONST_0 = 9,
+    LCONST_0 = 9,
 
-   LCONST_1 = 10,
+    LCONST_1 = 10,
 
-   FCONST_0 = 11,
+    FCONST_0 = 11,
 
-   FCONST_1 = 12,
+    FCONST_1 = 12,
 
-   FCONST_2 = 13,
+    FCONST_2 = 13,
 
-   DCONST_0 = 14,
+    DCONST_0 = 14,
 
-   DCONST_1 = 15,
+    DCONST_1 = 15,
 
-   BIPUSH = 16,
+    BIPUSH = 16,
 
-   SIPUSH = 17,
+    SIPUSH = 17,
 
-   LDC = 18,
+    LDC = 18,
 
-   ILOAD = 21,
+    ILOAD = 21,
 
-   LLOAD = 22,
+    LLOAD = 22,
 
-   FLOAD = 23,
+    FLOAD = 23,
 
-   DLOAD = 24,
+    DLOAD = 24,
 
-   ALOAD = 25,
+    ALOAD = 25,
 
-   IALOAD = 46,
+    IALOAD = 46,
 
-   LALOAD = 47,
+    LALOAD = 47,
 
-   FALOAD = 48,
+    FALOAD = 48,
 
-   DALOAD = 49,
+    DALOAD = 49,
 
-   AALOAD = 50,
+    AALOAD = 50,
 
-   BALOAD = 51,
+    BALOAD = 51,
 
-   CALOAD = 52,
+    CALOAD = 52,
 
-   SALOAD = 53,
+    SALOAD = 53,
 
-   ISTORE = 54,
+    ISTORE = 54,
 
-   LSTORE = 55,
+    LSTORE = 55,
 
-   FSTORE = 56,
+    FSTORE = 56,
 
-   DSTORE = 57,
+    DSTORE = 57,
 
-   ASTORE = 58,
+    ASTORE = 58,
 
-   IASTORE = 79,
+    IASTORE = 79,
 
-   LASTORE = 80,
+    LASTORE = 80,
 
-   FASTORE = 81,
+    FASTORE = 81,
 
-   DASTORE = 82,
+    DASTORE = 82,
 
-   AASTORE = 83,
+    AASTORE = 83,
 
-   BASTORE = 84,
+    BASTORE = 84,
 
-   CASTORE = 85,
+    CASTORE = 85,
 
-   SASTORE = 86,
+    SASTORE = 86,
 
-   POP = 87,
+    POP = 87,
 
-   POP2 = 88,
+    POP2 = 88,
 
-   DUP = 89,
+    DUP = 89,
 
-   DUP_X1 = 90,
+    DUP_X1 = 90,
 
-   DUP_X2 = 91,
+    DUP_X2 = 91,
 
-   DUP2 = 92,
+    DUP2 = 92,
 
-   DUP2_X1 = 93,
+    DUP2_X1 = 93,
 
-   DUP2_X2 = 94,
+    DUP2_X2 = 94,
 
-   SWAP = 95,
+    SWAP = 95,
 
-   IADD = 96,
+    IADD = 96,
 
-   LADD = 97,
+    LADD = 97,
 
-   FADD = 98,
+    FADD = 98,
 
-   DADD = 99,
+    DADD = 99,
 
-   ISUB = 100,
+    ISUB = 100,
 
-   LSUB = 101,
+    LSUB = 101,
 
-   FSUB = 102,
+    FSUB = 102,
 
-   DSUB = 103,
+    DSUB = 103,
 
-   IMUL = 104,
+    IMUL = 104,
 
-   LMUL = 105,
+    LMUL = 105,
 
-   FMUL = 106,
+    FMUL = 106,
 
-   DMUL = 107,
+    DMUL = 107,
 
-   IDIV = 108,
+    IDIV = 108,
 
-   LDIV = 109,
+    LDIV = 109,
 
-   FDIV = 110,
+    FDIV = 110,
 
-   DDIV = 111,
+    DDIV = 111,
 
-   IREM = 112,
+    IREM = 112,
 
-   LREM = 113,
+    LREM = 113,
 
-   FREM = 114,
+    FREM = 114,
 
-   DREM = 115,
+    DREM = 115,
 
-   INEG = 116,
+    INEG = 116,
 
-   LNEG = 117,
+    LNEG = 117,
 
-   FNEG = 118,
+    FNEG = 118,
 
-   DNEG = 119,
+    DNEG = 119,
 
-   ISHL = 120,
+    ISHL = 120,
 
-   LSHL = 121,
+    LSHL = 121,
 
-   ISHR = 122,
+    ISHR = 122,
 
-   LSHR = 123,
+    LSHR = 123,
 
-   IUSHR = 124,
+    IUSHR = 124,
 
-   LUSHR = 125,
+    LUSHR = 125,
 
-   IAND = 126,
+    IAND = 126,
 
-   LAND = 127,
+    LAND = 127,
 
-   IOR = 128,
+    IOR = 128,
 
-   LOR = 129,
+    LOR = 129,
 
-   IXOR = 130,
+    IXOR = 130,
 
-   LXOR = 131,
+    LXOR = 131,
 
-   IINC = 132,
+    IINC = 132,
 
-   I2L = 133,
+    I2L = 133,
 
-   I2F = 134,
+    I2F = 134,
 
-   I2D = 135,
+    I2D = 135,
 
-   L2I = 136,
+    L2I = 136,
 
-   L2F = 137,
+    L2F = 137,
 
-   L2D = 138,
+    L2D = 138,
 
-   F2I = 139,
+    F2I = 139,
 
-   F2L = 140,
+    F2L = 140,
 
-   F2D = 141,
+    F2D = 141,
 
-   D2I = 142,
+    D2I = 142,
 
-   D2L = 143,
+    D2L = 143,
 
-   D2F = 144,
+    D2F = 144,
 
-   I2B = 145,
+    I2B = 145,
 
-   I2C = 146,
+    I2C = 146,
 
-   I2S = 147,
+    I2S = 147,
 
-   LCMP = 148,
+    LCMP = 148,
 
-   FCMPL = 149,
+    FCMPL = 149,
 
-   FCMPG = 150,
+    FCMPG = 150,
 
-   DCMPL = 151,
+    DCMPL = 151,
 
-   DCMPG = 152,
+    DCMPG = 152,
 
-   IFEQ = 153,
+    IFEQ = 153,
 
-   IFNE = 154,
+    IFNE = 154,
 
-   IFLT = 155,
+    IFLT = 155,
 
-   IFGE = 156,
+    IFGE = 156,
 
-   IFGT = 157,
+    IFGT = 157,
 
-   IFLE = 158,
+    IFLE = 158,
 
-   IF_ICMPEQ = 159,
+    IF_ICMPEQ = 159,
 
-   IF_ICMPNE = 160,
+    IF_ICMPNE = 160,
 
-   IF_ICMPLT = 161,
+    IF_ICMPLT = 161,
 
-   IF_ICMPGE = 162,
+    IF_ICMPGE = 162,
 
-   IF_ICMPGT = 163,
+    IF_ICMPGT = 163,
 
-   IF_ICMPLE = 164,
+    IF_ICMPLE = 164,
 
-   IF_ACMPEQ = 165,
+    IF_ACMPEQ = 165,
 
-   IF_ACMPNE = 166,
+    IF_ACMPNE = 166,
 
-   GOTO = 167,
+    GOTO = 167,
 
-   JSR = 168,
+    JSR = 168,
 
-   RET = 169,
+    RET = 169,
 
-   TABLESWITCH = 170,
+    TABLESWITCH = 170,
 
-   LOOKUPSWITCH = 171,
+    LOOKUPSWITCH = 171,
 
-   IRETURN = 172,
+    IRETURN = 172,
 
-   LRETURN = 173,
+    LRETURN = 173,
 
-   FRETURN = 174,
+    FRETURN = 174,
 
-   DRETURN = 175,
+    DRETURN = 175,
 
-   ARETURN = 176,
+    ARETURN = 176,
 
-   RETURN = 177,
+    RETURN = 177,
 
-   GETSTATIC = 178,
+    GETSTATIC = 178,
 
-   PUTSTATIC = 179,
+    PUTSTATIC = 179,
 
-   GETFIELD = 180,
+    GETFIELD = 180,
 
-   PUTFIELD = 181,
+    PUTFIELD = 181,
 
-   INVOKEVIRTUAL = 182,
+    INVOKEVIRTUAL = 182,
 
-   INVOKESPECIAL = 183,
+    INVOKESPECIAL = 183,
 
-   INVOKESTATIC = 184,
+    INVOKESTATIC = 184,
 
-   INVOKEINTERFACE = 185,
+    INVOKEINTERFACE = 185,
 
-   INVOKEDYNAMIC = 186,
+    INVOKEDYNAMIC = 186,
 
-   NEW = 187,
+    NEW = 187,
 
-   NEWARRAY = 188,
+    NEWARRAY = 188,
 
-   ANEWARRAY = 189,
+    ANEWARRAY = 189,
 
-   ARRAYLENGTH = 190,
+    ARRAYLENGTH = 190,
 
-   ATHROW = 191,
+    ATHROW = 191,
 
-   CHECKCAST = 192,
+    CHECKCAST = 192,
 
-   INSTANCEOF = 193,
+    INSTANCEOF = 193,
 
-   MONITORENTER = 194,
+    MONITORENTER = 194,
 
-   MONITOREXIT = 195,
+    MONITOREXIT = 195,
 
-   MULTIANEWARRAY = 197,
+    MULTIANEWARRAY = 197,
 
-   IFNULL = 198,
+    IFNULL = 198,
 
-   IFNONNULL = 199,
+    IFNONNULL = 199,
 }
