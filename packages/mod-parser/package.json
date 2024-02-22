@@ -1,6 +1,6 @@
 {
     "name": "@createlumina/mod-parser",
-    "version": "3.3.5",
+    "version": "1.0.0",
     "main": "./index.ts",
     "description": "The utilities to parse Forge/Liteloader/Fabric/Quilt mod metadata.",
     "engines": {
@@ -25,7 +25,7 @@
         "type": "git",
         "url": "git+https://github.com/CreateLumina/minecraft-utils.git"
     },
-    "author": "cijhn@hotmail.com",
+    "author": "CreateLumina",
     "sideEffects": false,
     "keywords": [
         "minecraft",

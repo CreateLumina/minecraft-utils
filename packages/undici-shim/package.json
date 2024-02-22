@@ -1,6 +1,6 @@
 {
-    "name": "undici-shim",
-    "version": "0.0.2",
+    "name": "@createlumina/undici-shim",
+    "version": "1.0.0",
     "private": true,
     "module": "index.ts"
 }

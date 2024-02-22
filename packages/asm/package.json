@@ -1,6 +1,6 @@
 {
     "name": "@createlumina/asm",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "main": "./index.ts",
     "description": "Java ASM module transferred into the typescript",
     "engines": {
@@ -20,7 +20,7 @@
         "type": "git",
         "url": "git+https://github.com/CreateLumina/minecraft-utils.git"
     },
-    "author": "cijhn@hotmail.com",
+    "author": "CreateLumina",
     "keywords": [
         "typescript",
         "nodejs",

@@ -1,6 +1,6 @@
 {
     "name": "@createlumina/text-component",
-    "version": "2.1.3",
+    "version": "1.0.0",
     "main": "./index.ts",
     "description": "Parse Minecraft text component and render it to css.",
     "engines": {
@@ -20,7 +20,7 @@
         "type": "git",
         "url": "git+https://github.com/CreateLumina/minecraft-utils.git"
     },
-    "author": "cijhn@hotmail.com",
+    "author": "CreateLumina",
     "sideEffects": false,
     "keywords": [
         "minecraft",

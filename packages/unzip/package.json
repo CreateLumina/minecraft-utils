@@ -1,6 +1,6 @@
 {
     "name": "@createlumina/unzip",
-    "version": "2.1.2",
+    "version": "1.0.0",
     "main": "./index.ts",
     "description": "A easy unzip interface based on yauzl",
     "engines": {
@@ -27,7 +27,7 @@
         "type": "git",
         "url": "git+https://github.com/CreateLumina/minecraft-utils.git"
     },
-    "author": "cijhn@hotmail.com",
+    "author": "CreateLumina",
     "sideEffects": false,
     "keywords": [
         "typescript",

@@ -1,6 +1,6 @@
 {
     "name": "@createlumina/nbt",
-    "version": "3.0.2",
+    "version": "1.0.0",
     "main": "./index.ts",
     "browser": "./dist/index.browser.mjs",
     "description": "NBT serialization and deserialization",
@@ -22,7 +22,7 @@
         "type": "git",
         "url": "git+https://github.com/CreateLumina/minecraft-utils.git"
     },
-    "author": "cijhn@hotmail.com",
+    "author": "CreateLumina",
     "keywords": [
         "minecraft",
         "typescript",

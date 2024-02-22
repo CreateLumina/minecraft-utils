@@ -1,6 +1,6 @@
 {
     "name": "@createlumina/bytebuffer",
-    "version": "0.1.1",
+    "version": "1.0.0",
     "main": "./index.ts",
     "description": "A bytebuffer module ported from bytebuffer.js",
     "engines": {
@@ -42,7 +42,7 @@
         "type": "git",
         "url": "git+https://github.com/CreateLumina/minecraft-utils.git"
     },
-    "author": "cijhn@hotmail.com",
+    "author": "CreateLumina",
     "keywords": [
         "typescript",
         "nodejs",

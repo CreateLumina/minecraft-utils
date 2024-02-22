@@ -1,6 +1,6 @@
 {
     "name": "@createlumina/client",
-    "version": "3.1.1",
+    "version": "1.0.0",
     "main": "./index.ts",
     "description": "Minecraft socket pipeline utilities. Support Minecraft lan server discovery.",
     "engines": {
@@ -25,7 +25,7 @@
         "type": "git",
         "url": "git+https://github.com/CreateLumina/minecraft-utils.git"
     },
-    "author": "cijhn@hotmail.com",
+    "author": "CreateLumina",
     "keywords": [
         "minecraft",
         "typescript",

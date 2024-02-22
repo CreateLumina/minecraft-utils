@@ -246,10 +246,12 @@ export abstract class BaseTask<T> implements Task<T> {
         const copy = Object.create(this);
         const wait = copy.wait;
         copy.wait = function (this: typeof copy) {
-            // @ts-expect-error
-            return wait
-                .bind(this)()
-                .then((r) => transform.bind(this)(r));
+            return (
+                wait
+                    .bind(this)()
+                    // @ts-expect-error
+                    .then((r) => transform.bind(this)(r))
+            );
         };
         return copy;
     }

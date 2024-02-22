@@ -1,6 +1,6 @@
 {
     "name": "@createlumina/user",
-    "version": "4.1.0",
+    "version": "1.0.0",
     "main": "./index.ts",
     "description": "Minecraft user related functions, including Yggdrasil authenticator, player skin fetcher, and Mojang security API",
     "scripts": {
@@ -27,7 +27,7 @@
         "type": "git",
         "url": "git+https://github.com/CreateLumina/minecraft-utils.git"
     },
-    "author": "cijhn@hotmail.com",
+    "author": "CreateLumina",
     "keywords": [
         "minecraft",
         "typescript",

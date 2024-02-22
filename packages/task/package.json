@@ -1,9 +1,9 @@
 {
     "name": "@createlumina/task",
-    "version": "4.1.0",
+    "version": "1.0.0",
     "main": "./index.ts",
     "author": {
-        "name": "cijhn@hotmail.com"
+        "name": "CreateLumina"
     },
     "description": "A task interface using tree structure.",
     "scripts": {
