@@ -90,7 +90,7 @@ export abstract class BaseTask<T> implements Task<T> {
     name = '';
     param: object = {};
 
-    protected resultOrError: T | any;
+    resultOrError: T | any;
 
     constructor() {
         this._promise = new Promise((resolve, reject) => {
